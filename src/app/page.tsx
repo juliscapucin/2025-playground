@@ -1,40 +1,61 @@
 'use client';
 
 import Image from 'next/image';
-import { useLayoutEffect } from 'react';
+import { useLayoutEffect, useRef } from 'react';
 
 import gsap from 'gsap';
 
+function animatedProgressBar() {
+    const tl = gsap.timeline();
+    const steps = 5;
+    let currentProgress = 0;
+
+    for (let i = 0; i < steps; i++) {
+        const finalStep = i === steps - 1;
+        const targetProgress = finalStep
+            ? 1
+            : Math.min(currentProgress + Math.random() * 0.3 + 0.1, 0.9);
+        currentProgress = targetProgress;
+        tl.to("[data-gsap='preloader-progress-bar']", {
+            xPercent: targetProgress * 100,
+            ease: 'power2.inOut',
+            duration: 2 / steps,
+        });
+    }
+    return tl;
+}
+
 export default function Home() {
-    useLayoutEffect(() => {}, []);
+    const progressBarRef = useRef<HTMLDivElement>(null);
+    const outerContainerRef = useRef<HTMLDivElement>(null);
 
     useLayoutEffect(() => {
+        if (!outerContainerRef.current) return;
+
         const ctx = gsap.context(() => {
-            gsap.to('[data-gsap-selector=preloader-progress-bar]', {
-                xPercent: 100,
-                ease: 'power2.inOut',
-                duration: 1.5,
-            });
-        }, '[data-gsap-selector=preloader-progress-bar]'); // <-- scope for selector text
-        return () => ctx.revert(); // <-- cleanup
+            const tl = gsap.timeline();
+            tl.add(animatedProgressBar());
+        }, outerContainerRef);
+
+        return () => ctx.revert();
     }, []);
 
     return (
-        <>
+        <div ref={outerContainerRef} className='relative h-svh w-full'>
             {/* Preloader Progress */}
-            <div className='fixed inset-0 pointer-events-none z-5'>
+            <div className='fixed h-full w-full flex flex-col justify-center items-center pointer-events-none z-5'>
                 {/* Preloader Progress Bar */}
-                <div
-                    data-gsap-selector='preloader-progress-bar'
-                    className='absolute bg-secondary w-1/2 h-full will-change-transform'
-                ></div>
+                <div className='w-1/2 h-1/4 rounded-huge overflow-clip'>
+                    <div
+                        data-gsap='preloader-progress-bar'
+                        className='-translate-x-full bg-secondary w-full h-full will-change-transform'
+                    ></div>
+                </div>
 
                 {/* Preloader Logo */}
-                <div className='absolute inset-0 flex justify-center items-center'>
-                    <h1 className='text-display-large leading-1 text-center text-primary'>
-                        Obsidian
-                    </h1>
-                </div>
+                <h1 className='absolute block text-display-large text-center text-primary'>
+                    Obsidian
+                </h1>
             </div>
 
             {/* Preloader Mask */}
@@ -94,6 +115,6 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-        </>
+        </div>
     );
 }
