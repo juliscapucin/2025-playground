@@ -63,6 +63,24 @@ function animateProgressBarText() {
     return tl;
 }
 
+function animateMask() {
+    const tl = gsap.timeline();
+
+    tl.fromTo(
+        '#mask',
+        {
+            clipPath: 'inset(40% 25% 40% 25% round 128px)',
+        },
+        {
+            clipPath: 'inset(0% 0% 0% 0% round 128px)',
+            ease: 'power2.inOut',
+            duration: 1.5,
+        }
+    );
+
+    return tl;
+}
+
 export default function Home() {
     const progressBarRef = useRef<HTMLDivElement>(null);
     const outerContainerRef = useRef<HTMLDivElement>(null);
@@ -72,7 +90,9 @@ export default function Home() {
 
         const ctx = gsap.context(() => {
             const tl = gsap.timeline();
-            tl.add(animatedProgressBar()).add(animateProgressBarText(), 0.5);
+            tl.add(animatedProgressBar())
+                .add(animateProgressBarText(), 0.5)
+                .add(animateMask(), 2.5);
         }, outerContainerRef);
 
         return () => ctx.revert();
@@ -101,9 +121,6 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Preloader Mask */}
-            <div className='fixed inset-0 rounded-huge pointer-events-none'></div>
-
             {/* Preloader Content */}
             <div className='fixed inset-0 pointer-events-none'>
                 <div className='preloader-footer'>
@@ -112,49 +129,46 @@ export default function Home() {
             </div>
 
             {/* Container */}
-            <div className='relative h-full w-full'>
-                {/* Hero */}
-                <div className='relative h-full w-full'>
-                    {/* Hero Inner */}
-                    <div className='relative w-full h-full rounded-huge'>
-                        {/* Hero Content */}
-                        <div className='absolute w-full h-full z-5 flex justify-center items-center'>
-                            <div>
-                                <div className='header'>
-                                    <h1 className='text-display-large'>
-                                        Welcome to Obsidian
-                                    </h1>
-                                </div>
-                                <div className='contact-btn'>Contact</div>
-                                <div className='menu-btn'>Menu</div>
+            {/* Hero */}
+            <div id='mask' className='relative h-full w-full'>
+                {/* Hero Inner */}
+                <div className='relative w-full h-full'>
+                    {/* Hero Content */}
+                    <div className='absolute w-full h-full z-5 flex justify-center items-center'>
+                        <div>
+                            <div className='header'>
+                                <h1 className='text-display-large'>
+                                    Welcome to Obsidian
+                                </h1>
                             </div>
+                            <div className='contact-btn'>Contact</div>
+                            <div className='menu-btn'>Menu</div>
                         </div>
+                    </div>
 
-                        {/* Hero Image */}
-                        <div className='absolute inset-0 will-change-transform'>
-                            <Image
-                                src='/kristaps-ungurs-4orvBonHMGk-unsplash.jpg'
-                                alt='Logo'
-                                fill
-                                style={{ objectFit: 'cover' }}
-                                priority
-                                sizes='(max-width: 768px) 20vw, 33vw'
-                            />
-                        </div>
+                    {/* Hero Image */}
+                    <div className='absolute inset-0 will-change-transform'>
+                        <Image
+                            src='/kristaps-ungurs-4orvBonHMGk-unsplash.jpg'
+                            alt='Logo'
+                            fill
+                            style={{ objectFit: 'cover' }}
+                            priority
+                            sizes='(max-width: 768px) 20vw, 33vw'
+                        />
+                    </div>
 
-                        {/* Hero Footer */}
-                        <div className='absolute bottom-0 w-full p-8 z-5 flex justify-between items-start'>
-                            <h3 className='text-title-large left-0 w-1/4'>
-                                Spaces defined through light and silence
-                            </h3>
-                            <p className='text-body-medium w-1/4 text-right'>
-                                lorem ipsum Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Id error
-                                architecto dolores porro quae possimus sequi
-                                adipisci pariatur facere corporis totam neque
-                                rem voluptatem eaque, aliquid.
-                            </p>
-                        </div>
+                    {/* Hero Footer */}
+                    <div className='absolute bottom-0 w-full p-8 z-5 flex justify-between items-start'>
+                        <h3 className='text-title-large left-0 w-1/4'>
+                            Spaces defined through light and silence
+                        </h3>
+                        <p className='text-body-medium w-1/4 text-right'>
+                            lorem ipsum Lorem ipsum dolor sit amet consectetur
+                            adipisicing elit. Id error architecto dolores porro
+                            quae possimus sequi adipisci pariatur facere
+                            corporis totam neque rem voluptatem eaque, aliquid.
+                        </p>
                     </div>
                 </div>
             </div>
