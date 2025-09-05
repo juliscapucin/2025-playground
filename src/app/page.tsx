@@ -5,7 +5,9 @@ import { useLayoutEffect, useRef } from 'react';
 
 import gsap from 'gsap';
 import { SplitText } from 'gsap/SplitText';
+import { GSDevTools } from 'gsap/GSDevTools';
 gsap.registerPlugin(SplitText);
+gsap.registerPlugin(GSDevTools);
 
 function animatedProgressBar() {
     const tl = gsap.timeline();
@@ -66,17 +68,27 @@ function animateProgressBarText() {
 function animateMask() {
     const tl = gsap.timeline();
 
-    tl.fromTo(
-        '#mask',
-        {
-            clipPath: 'inset(40% 25% 40% 25% round 128px)',
-        },
-        {
-            clipPath: 'inset(0% 0% 0% 0% round 128px)',
-            ease: 'power2.inOut',
-            duration: 1.5,
-        }
-    );
+    tl.set('[data-gsap="mask"]', { opacity: 1 })
+        .fromTo(
+            '[data-gsap="mask"]',
+            {
+                clipPath: 'inset(40% 25% 40% 25% round var(--radius-huge))',
+            },
+            {
+                clipPath: 'inset(0% 0% 0% 0% round var(--radius-huge))',
+                ease: 'power2.inOut',
+                duration: 0.6,
+            }
+        )
+        .to(
+            '[data-gsap="hero-image"]',
+            {
+                scale: 1,
+                ease: 'power4.inOut',
+                duration: 1,
+            },
+            '<'
+        );
 
     return tl;
 }
@@ -92,16 +104,29 @@ export default function Home() {
             const tl = gsap.timeline();
             tl.add(animatedProgressBar())
                 .add(animateProgressBarText(), 0.5)
-                .add(animateMask(), 2.5);
+                .add(animateMask(), 2.5)
+                .to(
+                    "[data-gsap='preloader-progress-bar-container']",
+                    {
+                        opacity: 0,
+                        duration: 0.3,
+                    },
+                    2.5
+                );
+
+            GSDevTools.create({ animation: tl });
         }, outerContainerRef);
 
         return () => ctx.revert();
     }, []);
 
     return (
-        <div ref={outerContainerRef} className='relative h-svh w-full'>
+        <div ref={outerContainerRef} className='relative h-full w-full'>
             {/* Preloader Progress */}
-            <div className='fixed h-full w-full flex flex-col justify-center items-center overflow-clip pointer-events-none z-10'>
+            <div
+                data-gsap='preloader-progress-bar-container'
+                className='fixed h-full w-full flex flex-col justify-center items-center overflow-clip pointer-events-none z-10'
+            >
                 {/* Preloader Progress Bar */}
                 <div className='w-1/2 h-1/5 bg-primary rounded-huge overflow-clip'>
                     <div
@@ -121,55 +146,46 @@ export default function Home() {
                 </div>
             </div>
 
-            {/* Preloader Content */}
-            <div className='fixed inset-0 pointer-events-none'>
-                <div className='preloader-footer'>
-                    <p>lorem ipsum dolor sit amet lorem ipsum dolor sit amet</p>
-                </div>
-            </div>
-
-            {/* Container */}
             {/* Hero */}
-            <div id='mask' className='relative h-full w-full'>
-                {/* Hero Inner */}
-                <div className='relative w-full h-full'>
-                    {/* Hero Content */}
-                    <div className='absolute w-full h-full z-5 flex justify-center items-center'>
-                        <div>
-                            <div className='header'>
-                                <h1 className='text-display-large'>
-                                    Welcome to Obsidian
-                                </h1>
-                            </div>
-                            <div className='contact-btn'>Contact</div>
-                            <div className='menu-btn'>Menu</div>
-                        </div>
-                    </div>
+            <div data-gsap='mask' className='relative h-full w-full opacity-0'>
+                {/* Hero Content */}
+                <div className='absolute w-full h-full flex justify-center items-center'>
+                    <h1 className='text-display-large leading-24 z-5'>
+                        Welcome to Obsidian
+                    </h1>
+                </div>
 
-                    {/* Hero Image */}
-                    <div className='absolute inset-0 will-change-transform'>
-                        <Image
-                            src='/kristaps-ungurs-4orvBonHMGk-unsplash.jpg'
-                            alt='Logo'
-                            fill
-                            style={{ objectFit: 'cover' }}
-                            priority
-                            sizes='(max-width: 768px) 20vw, 33vw'
-                        />
-                    </div>
+                {/* Links */}
+                <div data-gsap='links' className='absolute p-12 z-5'>
+                    <div className='contact-btn'>Contact</div>
+                    <div className='menu-btn'>Menu</div>
+                </div>
 
-                    {/* Hero Footer */}
-                    <div className='absolute bottom-0 w-full p-8 z-5 flex justify-between items-start'>
-                        <h3 className='text-title-large left-0 w-1/4'>
-                            Spaces defined through light and silence
-                        </h3>
-                        <p className='text-body-medium w-1/4 text-right'>
-                            lorem ipsum Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Id error architecto dolores porro
-                            quae possimus sequi adipisci pariatur facere
-                            corporis totam neque rem voluptatem eaque, aliquid.
-                        </p>
-                    </div>
+                {/* Hero Image */}
+                <div
+                    data-gsap='hero-image'
+                    className='transform scale-125 absolute top-0 left-0 w-full h-full -z-1'
+                >
+                    <Image
+                        src='/kristaps-ungurs-4orvBonHMGk-unsplash.jpg'
+                        alt='Logo'
+                        fill
+                        style={{ objectFit: 'cover' }}
+                        priority
+                        sizes='(max-width: 768px) 20vw, 33vw'
+                    />
+                </div>
+
+                {/* Hero Footer */}
+                <div className='absolute bottom-0 w-full p-12 flex justify-between items-start z-5 '>
+                    <h3 className='text-title-large left-0 w-1/4'>
+                        Spaces defined through light and silence
+                    </h3>
+                    <p className='text-body-medium w-1/4 text-right'>
+                        lorem ipsum Lorem ipsum dolor sit amet consectetur
+                        adipisicing elit. Id error architecto dolores porro quae
+                        possimus sequi adipisci pariatur.
+                    </p>
                 </div>
             </div>
         </div>
