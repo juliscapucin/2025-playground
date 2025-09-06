@@ -9,6 +9,30 @@ import { GSDevTools } from 'gsap/GSDevTools';
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(GSDevTools);
 
+function createSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
+    const config = { type, mask: type };
+    return SplitText.create(selector, config);
+}
+
+function animateSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
+    const tl = gsap.timeline();
+    const split = createSplitText(selector, type);
+    tl.fromTo(
+        split[type],
+        {
+            yPercent: 150,
+        },
+        {
+            yPercent: 0,
+            stagger: 0.01,
+            duration: 0.1,
+            ease: 'power2.out',
+        }
+    );
+
+    return tl;
+}
+
 function animatedProgressBar() {
     const tl = gsap.timeline();
 
@@ -44,27 +68,6 @@ function animatedProgressBar() {
     return tl;
 }
 
-function animateProgressBarText() {
-    const tl = gsap.timeline();
-
-    const split = SplitText.create("[data-gsap='preloader-text']", {
-        type: 'chars',
-    });
-    tl.fromTo(
-        split.chars,
-        {
-            yPercent: 150,
-        },
-        {
-            yPercent: 0,
-            stagger: 0.1,
-            duration: 0.6,
-        }
-    );
-
-    return tl;
-}
-
 function animateMask() {
     const tl = gsap.timeline();
 
@@ -76,15 +79,15 @@ function animateMask() {
             },
             {
                 clipPath: 'inset(0% 0% 0% 0% round var(--radius-huge))',
-                ease: 'power2.inOut',
-                duration: 0.6,
+                ease: 'power2.out',
+                duration: 0.8,
             }
         )
         .to(
             '[data-gsap="hero-image"]',
             {
                 scale: 1,
-                ease: 'power4.inOut',
+                ease: 'power4.out',
                 duration: 1,
             },
             '<'
@@ -103,18 +106,23 @@ export default function Home() {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline();
             tl.add(animatedProgressBar())
-                .add(animateProgressBarText(), 0.5)
-                .add(animateMask(), 2.5)
+                .add(animateSplitText("[data-gsap='preloader-text']", 'chars'))
+                .add(animateMask(), 'mask') // label for mask start
+                // Fade out progress bar container
                 .to(
                     "[data-gsap='preloader-progress-bar-container']",
                     {
                         opacity: 0,
                         duration: 0.3,
                     },
-                    2.5
-                );
+                    'mask' // start at the same time as animateMask
+                )
+                .add(
+                    animateSplitText("[data-gsap='welcome-text']", 'chars'),
+                    '>0.1'
+                ); // start 0.1s after mask animation starts;
 
-            GSDevTools.create({ animation: tl });
+            // GSDevTools.create({ animation: tl });
         }, outerContainerRef);
 
         return () => ctx.revert();
@@ -125,7 +133,7 @@ export default function Home() {
             {/* Preloader Progress */}
             <div
                 data-gsap='preloader-progress-bar-container'
-                className='fixed h-full w-full flex flex-col justify-center items-center overflow-clip pointer-events-none z-10'
+                className='fixed inset-0 flex justify-center items-center pointer-events-none z-10'
             >
                 {/* Preloader Progress Bar */}
                 <div className='w-1/2 h-1/5 bg-primary rounded-huge overflow-clip'>
@@ -136,7 +144,7 @@ export default function Home() {
                 </div>
 
                 {/* Preloader Logo */}
-                <div className='absolute w-1/2 h-1/5 flex justify-center items-center overflow-clip'>
+                <div className='absolute w-fit h-1/5 flex justify-center items-center overflow-clip'>
                     <h1
                         data-gsap='preloader-text'
                         className='text-display-small md:text-display-medium xl:text-display-large text-center text-primary'
@@ -150,7 +158,10 @@ export default function Home() {
             <div data-gsap='mask' className='relative h-full w-full opacity-0'>
                 {/* Hero Content */}
                 <div className='absolute w-full h-full flex justify-center items-center'>
-                    <h1 className='text-display-large leading-24 z-5'>
+                    <h1
+                        data-gsap='welcome-text'
+                        className='text-display-large leading-24 z-5'
+                    >
                         Welcome to Obsidian
                     </h1>
                 </div>
