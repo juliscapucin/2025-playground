@@ -14,7 +14,12 @@ function createSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
     return SplitText.create(selector, config);
 }
 
-function animateSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
+function animateSplitText(
+    selector: string,
+    type: 'chars' | 'lines' | 'words',
+    duration: number = 0.3,
+    stagger: number = 0.025
+) {
     const tl = gsap.timeline();
     const split = createSplitText(selector, type);
     tl.fromTo(
@@ -24,9 +29,9 @@ function animateSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
         },
         {
             yPercent: 0,
-            stagger: 0.01,
-            duration: 0.1,
-            ease: 'power2.out',
+            stagger,
+            ease: 'power4.out',
+            duration,
         }
     );
 
@@ -118,11 +123,31 @@ export default function Home() {
                     'mask' // start at the same time as animateMask
                 )
                 .add(
-                    animateSplitText("[data-gsap='welcome-text']", 'chars'),
-                    '>0.1'
-                ); // start 0.1s after mask animation starts;
+                    animateSplitText(
+                        "[data-gsap='welcome-text']",
+                        'chars',
+                        0.3,
+                        0.01
+                    ),
+                    'mask'
+                )
+                .add(animateSplitText("[data-gsap='links']", 'lines'), '<0.6')
+                .add(
+                    animateSplitText(
+                        "[data-gsap='hero-footer-heading']",
+                        'lines'
+                    ),
+                    '<0.2'
+                )
+                .add(
+                    animateSplitText(
+                        "[data-gsap='hero-footer-paragraph']",
+                        'lines'
+                    ),
+                    '<0.1'
+                );
 
-            // GSDevTools.create({ animation: tl });
+            GSDevTools.create({ animation: tl });
         }, outerContainerRef);
 
         return () => ctx.revert();
@@ -160,7 +185,7 @@ export default function Home() {
                 <div className='absolute w-full h-full flex justify-center items-center'>
                     <h1
                         data-gsap='welcome-text'
-                        className='text-display-large leading-24 z-5'
+                        className='text-display-large leading-36 z-5'
                     >
                         Welcome to Obsidian
                     </h1>
@@ -189,10 +214,16 @@ export default function Home() {
 
                 {/* Hero Footer */}
                 <div className='absolute bottom-0 w-full p-12 flex justify-between items-start z-5 '>
-                    <h3 className='text-title-large left-0 w-1/4'>
+                    <h3
+                        data-gsap='hero-footer-heading'
+                        className='text-title-large left-0 w-1/4'
+                    >
                         Spaces defined through light and silence
                     </h3>
-                    <p className='text-body-medium w-1/4 text-right'>
+                    <p
+                        data-gsap='hero-footer-paragraph'
+                        className='text-body-medium w-1/4 text-right'
+                    >
                         lorem ipsum Lorem ipsum dolor sit amet consectetur
                         adipisicing elit. Id error architecto dolores porro quae
                         possimus sequi adipisci pariatur.
