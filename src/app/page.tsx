@@ -80,7 +80,7 @@ function animateMask() {
         .fromTo(
             '[data-gsap="mask"]',
             {
-                clipPath: 'inset(50% 20% 50% 20% round var(--radius-huge))',
+                clipPath: 'inset(50% 40% 50% 40% round var(--radius-huge))',
             },
             {
                 clipPath: 'inset(0% 0% 0% 0% round var(--radius-huge))',
@@ -161,18 +161,16 @@ export default function Home() {
                 className='fixed inset-0 flex justify-center items-center pointer-events-none z-10'
             >
                 {/* Preloader Progress Bar */}
-                <div className='w-1/2 h-1/5 bg-primary rounded-huge overflow-clip'>
+                <div className='relative w-fit h-fit px-12 rounded-huge overflow-clip'>
+                    {/* Preloader Logo */}
+
                     <div
                         data-gsap='preloader-progress-bar'
-                        className='bg-secondary w-full h-full will-change-transform transform scale-x-0 origin-left'
+                        className='absolute inset-0 bg-secondary will-change-transform transform scale-x-0 origin-left z-0'
                     ></div>
-                </div>
-
-                {/* Preloader Logo */}
-                <div className='absolute w-fit h-1/5 flex justify-center items-center overflow-clip'>
                     <h1
                         data-gsap='preloader-text'
-                        className='text-display-small md:text-display-medium xl:text-display-large text-center text-primary'
+                        className='text-display-small md:text-display-medium xl:text-display-large text-center text-primary z-50'
                     >
                         Obsidian
                     </h1>
