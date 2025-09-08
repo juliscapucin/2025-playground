@@ -85,7 +85,7 @@ function animateMask() {
             {
                 clipPath: 'inset(0% 0% 0% 0% round var(--radius-huge))',
                 ease: 'power2.out',
-                duration: 0.8,
+                duration: 1,
             }
         )
         .to(
@@ -111,7 +111,14 @@ export default function Home() {
         const ctx = gsap.context(() => {
             const tl = gsap.timeline();
             tl.add(animatedProgressBar())
-                .add(animateSplitText("[data-gsap='preloader-text']", 'chars'))
+                .add(
+                    animateSplitText(
+                        "[data-gsap='preloader-text']",
+                        'chars',
+                        0.6,
+                        0.05
+                    )
+                )
                 .add(animateMask(), 'mask') // label for mask start
                 // Fade out progress bar container
                 .to(
@@ -126,8 +133,8 @@ export default function Home() {
                     animateSplitText(
                         "[data-gsap='welcome-text']",
                         'chars',
-                        0.3,
-                        0.01
+                        0.8,
+                        0.05
                     ),
                     'mask'
                 )

@@ -5,9 +5,13 @@
     --secondary: oklch(88.669% 0.01899 180.52);
 }
 
-@theme inline {
+@theme {
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
+
+    --font-primary: var(--font-acma);
+    --font-secondary: var(--font-noto);
+    --font-mono: var(--font-geist-mono);
 
     --radius-huge: 8rem;
 
@@ -31,7 +35,7 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 @custom-variant light (&:where([data-theme=light], [data-theme=light] *));
 
-@base {
+@layer base {
     *,
     *::before,
     *::after {
@@ -41,5 +45,10 @@
     * {
         margin: 0;
         padding: 0;
+    }
+
+    h1,
+    h2 {
+        font-family: var(--font-acma);
     }
 }
