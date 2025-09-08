@@ -2,7 +2,7 @@
 
 :root {
     --primary: oklch(21.3% 0.034 184.9);
-    --secondary: oklch(63.9% 0.205 177);
+    --secondary: oklch(88.669% 0.01899 180.52);
 }
 
 @theme inline {

@@ -80,7 +80,7 @@ function animateMask() {
         .fromTo(
             '[data-gsap="mask"]',
             {
-                clipPath: 'inset(40% 25% 40% 25% round var(--radius-huge))',
+                clipPath: 'inset(50% 20% 50% 20% round var(--radius-huge))',
             },
             {
                 clipPath: 'inset(0% 0% 0% 0% round var(--radius-huge))',
@@ -200,15 +200,16 @@ export default function Home() {
                 {/* Hero Image */}
                 <div
                     data-gsap='hero-image'
-                    className='transform scale-125 absolute top-0 left-0 w-full h-full -z-1'
+                    className='transform scale-125 will-change-transform absolute top-0 left-0 w-full h-full -z-1'
                 >
+                    <div className='absolute inset-0 bg-radial from-transparent from-20% to-primary z-5'></div>
                     <Image
-                        src='/kristaps-ungurs-4orvBonHMGk-unsplash.jpg'
+                        src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
                         alt='Logo'
                         fill
                         style={{ objectFit: 'cover' }}
                         priority
-                        sizes='(max-width: 768px) 20vw, 33vw'
+                        sizes='(max-width: 768px) 100vw'
                     />
                 </div>
 
