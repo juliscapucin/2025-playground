@@ -47,30 +47,31 @@ export default function Accordion() {
                 return (
                     <div
                         key={index}
-                        className='accordion-item mb-4 overflow-hidden border-y border-secondary'
+                        className='accordion-item overflow-hidden border-t border-secondary/20 last:border-b'
                     >
+                        {/* Header */}
                         <button
                             onClick={() => setOpenIndex(isOpen ? -1 : index)} // Toggle open state
                             aria-expanded={isOpen}
                             aria-controls={`accordion-content-${index}`}
                             id={`accordion-header-${index}`}
-                            className='relative flex w-full cursor-pointer items-center justify-between bg-secondary/10 px-4 py-3 pr-10 text-left text-secondary uppercase transition duration-500 focus:bg-secondary/50 focus:text-primary'
+                            className='group relative flex w-full cursor-pointer items-center justify-between px-4 py-3 pr-10 text-left font-primary text-secondary transition duration-600 hover:bg-secondary/50 hover:text-primary focus:bg-secondary/50 focus:text-primary'
                         >
                             {item.title}
 
                             {/* Chevron Icon */}
-                            <span
-                                className={`inline-flex h-8 w-8 transform items-center justify-center rounded-full border border-gray-700 transition duration-500 ${isOpen ? '-rotate-180 text-white' : ''}`}
-                            >
+                            <span className='flex h-8 w-8 items-center justify-center text-secondary group-hover:text-primary group-focus:text-primary'>
                                 <IconChevron
-                                    direction={isOpen ? 'up' : 'down'}
+                                    direction={isOpen ? 'down' : 'up'}
                                 />
                             </span>
                         </button>
+
+                        {/* Content Area */}
                         <div
-                            className={`overflow-hidden bg-gray-800 px-4 transition-[max-height] duration-500 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
+                            className={`overflow-hidden bg-primary transition-[max-height] duration-800 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
                         >
-                            <p className='p-2 text-justify text-gray-400'>
+                            <p className='m-4 text-justify text-secondary'>
                                 {item.content}
                             </p>
                         </div>

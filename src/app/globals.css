@@ -5,7 +5,7 @@
     --secondary: oklch(88.669% 0.01899 180.52);
 }
 
-@theme {
+@theme inline {
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
 
