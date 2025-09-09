@@ -1,56 +1,78 @@
-import { useState } from 'react';
+// components/Accordion.js
+import { useEffect, useState } from 'react';
 
-const cards = [
+const items = [
     {
-        title: 'Autumn',
-        subtitle: 'Omuke trughte a otufta',
-        image: 'https://66.media.tumblr.com/8b69cdde47aa952e4176b4200052abf4/tumblr_o51p7mFFF21qho82wo1_1280.jpg',
+        title: 'Title for Tab - 1',
+        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
-        title: 'Winter',
-        subtitle: 'Omuke trughte a otufta',
-        image: 'https://66.media.tumblr.com/5af3f8303456e376ceda1517553ba786/tumblr_o4986gakjh1qho82wo1_1280.jpg',
+        title: 'Title for Tab - 2',
+        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
-        title: 'Spring',
-        subtitle: 'Omuke trughte a otufta',
-        image: 'https://66.media.tumblr.com/5516a22e0cdacaa85311ec3f8fd1e9ef/tumblr_o45jwvdsL11qho82wo1_1280.jpg',
-    },
-    {
-        title: 'Summer',
-        subtitle: 'Omuke trughte a otufta',
-        image: 'https://66.media.tumblr.com/f19901f50b79604839ca761cd6d74748/tumblr_o65rohhkQL1qho82wo1_1280.jpg',
+        title: 'Title for Tab - 3',
+        content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
 ];
 
 export default function Accordion() {
-    const [activeIdx, setActiveIdx] = useState(0);
+    const [openIndex, setOpenIndex] = useState(-1);
+
+    useEffect(() => {
+        function closeOnEsc(e: KeyboardEvent | MouseEvent) {
+            if (e instanceof KeyboardEvent && e.key === 'Escape') {
+                setOpenIndex(-1);
+            }
+        }
+        function closeOnClickOutside(e: MouseEvent) {
+            if (!(e.target as HTMLElement).closest('.accordion-item')) {
+                setOpenIndex(-1);
+            }
+        }
+        document.addEventListener('click', closeOnClickOutside);
+        document.addEventListener('keydown', closeOnEsc);
+        return () => {
+            document.removeEventListener('keydown', closeOnEsc);
+            document.removeEventListener('click', closeOnClickOutside);
+        };
+    }, []);
 
     return (
-        <div className='flex w-full max-w-7xl h-96 gap-4 overflow-hidden mt-32 mb-16 mx-auto'>
-            {cards.map((card, index) => (
-                <div
-                    key={index}
-                    onMouseEnter={() => setActiveIdx(index)}
-                    onMouseLeave={() => setActiveIdx(-1)}
-                    className={`
-            flex-none cursor-pointer transition-all duration-500 relative rounded-3xl bg-secondary overflow-clip
-            ${activeIdx === index ? 'grow-[10]' : 'grow'}
-          `}
-                >
-                    <div className='absolute inset-0'></div>
-
-                    {/* Label */}
-                    <div className='absolute bottom-4 left-4 text-primary flex items-center gap-4'>
-                        <div className='font-bold'>{card.title}</div>
-                        <div
-                            className={`text-sm transition-opacity text-nowrap duration-300 ${activeIdx === index ? 'opacity-100' : 'opacity-0'}`}
+        <div className='container mx-auto my-8 px-4'>
+            {items.map((item, index) => {
+                const isOpen = openIndex === index;
+                return (
+                    <div
+                        key={index}
+                        className='accordion-item rounded-full overflow-hidden mb-4'
+                    >
+                        <button
+                            onClick={() => setOpenIndex(isOpen ? -1 : index)} // Toggle open state
+                            aria-expanded={isOpen}
+                            aria-controls={`accordion-content-${index}`}
+                            id={`accordion-header-${index}`}
+                            className='w-full bg-secondary text-left text-primary flex justify-between items-center px-4 py-3 cursor-pointer pr-10 relative transition duration-500 focus:outline-none focus:text-white focus:bg-gray-700'
                         >
-                            {card.subtitle}
+                            {item.title}
+
+                            {/* Chevron Icon */}
+                            <span
+                                className={`h-8 w-8 border border-gray-700 rounded-full inline-flex items-center justify-center transform transition duration-500 ${isOpen ? '-rotate-180 text-white' : ''}`}
+                            >
+                                <i className='fas fa-chevron-down' />
+                            </span>
+                        </button>
+                        <div
+                            className={`bg-gray-800 px-4 overflow-hidden transition-[max-height] duration-500 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
+                        >
+                            <p className='p-2 text-gray-400 text-justify'>
+                                {item.content}
+                            </p>
                         </div>
                     </div>
-                </div>
-            ))}
+                );
+            })}
         </div>
     );
 }

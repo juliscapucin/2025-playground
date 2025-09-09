@@ -9,7 +9,7 @@ import { GSDevTools } from 'gsap/GSDevTools';
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(GSDevTools);
 
-import { Accordion } from '@/components';
+import { ExpandableCards, Accordion } from '@/components';
 
 function createSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
     const config = { type, mask: type };
@@ -242,6 +242,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <ExpandableCards />
             <Accordion />
         </>
     );
