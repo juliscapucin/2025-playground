@@ -15,10 +15,6 @@ const cardsData = [
     { title: 'Card 2', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
     { title: 'Card 3', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
     { title: 'Card 4', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 5', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 6', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 7', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 8', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
 ];
 
 const cardsShuffleAnimation = (cards: HTMLElement[]) => {
@@ -42,6 +38,19 @@ const cardsShuffleAnimation = (cards: HTMLElement[]) => {
     return tl;
 };
 
+const cardsExpansionAnimation = (cards: HTMLElement[]) => {
+    const tl = gsap.timeline();
+    tl.to(cards, {
+        rotation: 0,
+        xPercent: gsap.utils.wrap([-50, -100, 0, 100, 50]),
+        yPercent: gsap.utils.wrap([100, 50, 0, 50, 100]),
+        duration: 1,
+        ease: 'power2.out',
+        stagger: 0.1,
+    });
+    return tl;
+};
+
 export default function Carousel() {
     const containerRef = useRef<HTMLDivElement>(null);
     const itemsRef = useRef<HTMLDivElement>(null);
@@ -55,23 +64,27 @@ export default function Carousel() {
 
         const ctx = gsap.context(() => {
             const tl = gsap.timeline({
+                // ScrollTrigger
                 scrollTrigger: {
                     trigger: container,
-                    start: 'top 80%', // when the top of the trigger hits 80% of the viewport height
-                    end: 'bottom center',
-                    scrub: 1, // smooth scrubbing, takes 1 second to "catch up" to the scrollbar
+                    start: 'top 20%',
+                    scrub: 1,
+                    pin: true,
                 },
             });
 
-            tl.add(cardsShuffleAnimation(cards)).add(
-                animateSplitText(
-                    "[data-gsap='cards-shuffle-heading']",
-                    'chars',
-                    1,
-                    0.03
-                ),
-                '<0.4' // start 0.4 seconds before the previous animation ends
-            );
+            tl.add(cardsShuffleAnimation(cards)) // Shuffle cards
+                // Text Animation
+                .add(
+                    animateSplitText(
+                        "[data-gsap='cards-shuffle-heading']",
+                        'chars',
+                        1,
+                        0.03
+                    ),
+                    '<0.4' // start 0.4 seconds before the previous animation ends
+                )
+                .add(cardsExpansionAnimation(cards), '+0.2');
         }, container);
         return () => ctx.revert();
     }, []);
@@ -79,9 +92,9 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-[80svh] w-full'
+            className='relative mx-auto my-32 h-[80svh] w-full rounded-3xl bg-secondary/5'
         >
-            <div className='pointer-events-none absolute z-10 flex h-full w-full items-center justify-center'>
+            <div className='pointer-events-none absolute z-10 flex h-full w-full items-start justify-center'>
                 <Heading
                     tag='h2'
                     variant='display'
@@ -92,7 +105,7 @@ export default function Carousel() {
             </div>
             <div
                 ref={itemsRef}
-                className='flex h-full w-full items-center justify-center'
+                className='flex h-full w-full items-start justify-center'
             >
                 {cardsData.map((card, index) => (
                     <div

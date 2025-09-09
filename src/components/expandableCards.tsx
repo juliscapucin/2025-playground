@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Image from 'next/image';
 
+import { Heading } from '@/components/ui';
+
 const cards = [
     {
         title: 'Autumn',
@@ -28,16 +30,23 @@ export default function ExpandableCards() {
     const [activeIdx, setActiveIdx] = useState(0);
 
     return (
-        <div className='flex w-full max-w-7xl h-96 gap-4 overflow-hidden mt-32 mb-16 mx-auto'>
+        <div className='mx-auto my-64 flex h-96 w-full gap-4 overflow-hidden'>
+            <div>
+                <Heading tag='h2' variant='headline' classes='flex-2'>
+                    Seasons
+                </Heading>
+                <p className='mt-4 max-w-sm text-secondary/70'>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
+                    do eiusmod tempor incididunt ut labore et dolore magna
+                    aliqua.
+                </p>
+            </div>
             {cards.map((card, index) => (
                 <div
                     key={index}
                     onMouseEnter={() => setActiveIdx(index)}
                     onMouseLeave={() => setActiveIdx(-1)}
-                    className={`
-            flex-none cursor-pointer transition-all duration-500 relative rounded-3xl bg-secondary overflow-clip
-            ${activeIdx === index ? 'grow-[10]' : 'grow'}
-          `}
+                    className={`relative flex-none cursor-pointer overflow-clip rounded-3xl transition-all duration-500 ${activeIdx === index ? 'grow-[10]' : 'grow'} `}
                 >
                     <div className='absolute inset-0'>
                         <Image
@@ -50,12 +59,12 @@ export default function ExpandableCards() {
                     </div>
 
                     {/* Label */}
-                    <div className='absolute bottom-4 left-4 text-secondary flex items-center gap-4'>
-                        <div className='uppercase bg-primary py-1 px-4 rounded-full'>
+                    <div className='absolute bottom-4 left-4 flex items-center gap-4 text-secondary'>
+                        <div className='rounded-full bg-primary px-4 py-1 uppercase'>
                             {card.title}
                         </div>
                         <div
-                            className={`text-body-medium transition-opacity text-nowrap duration-300 ${activeIdx === index ? 'opacity-100' : 'opacity-0'}`}
+                            className={`text-body-medium text-nowrap transition-opacity duration-300 ${activeIdx === index ? 'opacity-100' : 'opacity-0'}`}
                         >
                             {card.subtitle}
                         </div>

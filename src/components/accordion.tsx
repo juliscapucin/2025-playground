@@ -42,8 +42,8 @@ export default function Accordion() {
 
     return (
         <div className='container mx-auto my-32 px-4'>
-            <Heading tag='h2' variant='headline'>
-                Accordion
+            <Heading tag='h2' variant='headline' classes='mb-8 text-center'>
+                FAQ
             </Heading>
             {items.map((item, index) => {
                 const isOpen = openIndex === index;
