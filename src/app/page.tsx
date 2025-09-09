@@ -10,35 +10,7 @@ gsap.registerPlugin(SplitText);
 gsap.registerPlugin(GSDevTools);
 
 import { ExpandableCards, Accordion, CardsShuffle } from '@/components';
-
-function createSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
-    const config = { type, mask: type };
-    return SplitText.create(selector, config);
-}
-
-function animateSplitText(
-    selector: string,
-    type: 'chars' | 'lines' | 'words',
-    duration: number = 0.3,
-    stagger: number = 0.025
-) {
-    const tl = gsap.timeline();
-    const split = createSplitText(selector, type);
-    tl.fromTo(
-        split[type],
-        {
-            yPercent: 150,
-        },
-        {
-            yPercent: 0,
-            stagger,
-            ease: 'power4.out',
-            duration,
-        }
-    );
-
-    return tl;
-}
+import { animateSplitText } from '@/lib/animations';
 
 function animatedProgressBar() {
     const tl = gsap.timeline();
@@ -167,7 +139,7 @@ export default function Home() {
                 {/* Preloader Progress */}
                 <div
                     data-gsap='preloader-progress-bar-container'
-                    className='pointer-events-none fixed inset-0 z-10 flex items-center justify-center'
+                    className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center'
                 >
                     {/* Preloader Progress Bar */}
                     <div className='relative h-fit w-fit overflow-clip rounded-huge px-12'>
@@ -243,8 +215,8 @@ export default function Home() {
                 </div>
             </div>
             <ExpandableCards />
-            <Accordion />
             <CardsShuffle />
+            <Accordion />
         </>
     );
 }

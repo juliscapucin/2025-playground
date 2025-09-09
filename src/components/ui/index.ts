@@ -5,7 +5,6 @@ import Header from './header';
 import Heading from './heading';
 import ImageWithSpinner from './imageWithSpinner';
 import Loader from './loader';
-import Logo from './logo';
 import MenuMobile from './menuMobile';
 import NavLink from './navLink';
 import SectionWrapper from './sectionWrapper';
@@ -21,7 +20,6 @@ export {
     Heading,
     ImageWithSpinner,
     Loader,
-    Logo,
     MenuMobile,
     NavLink,
     SectionWrapper,

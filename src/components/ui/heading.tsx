@@ -1,6 +1,6 @@
 import type { JSX } from 'react';
 type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {
-    tag: keyof JSX.IntrinsicElements;
+    tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     classes?: string;
     children: React.ReactNode;
     variant: 'display' | 'headline' | 'title';
@@ -11,8 +11,9 @@ export default function Heading({
     classes,
     children,
     variant,
+    ...props
 }: HeadingProps) {
-    const Tag = tag as keyof JSX.IntrinsicElements;
+    const Tag = tag;
     let headingStyles = '';
 
     switch (variant) {
@@ -39,6 +40,7 @@ export default function Heading({
             className={`${
                 classes ? classes : ''
             } ${headingStyles} leading-none font-extralight tracking-tight`}
+            {...props}
         >
             {children}
         </Tag>
