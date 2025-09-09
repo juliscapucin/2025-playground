@@ -1,4 +1,5 @@
 import Accordion from './accordion';
+import CardsShuffle from './cardsShuffle';
 import ExpandableCards from './expandableCards';
 
-export { Accordion, ExpandableCards };
+export { Accordion, CardsShuffle, ExpandableCards };

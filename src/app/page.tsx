@@ -9,7 +9,7 @@ import { GSDevTools } from 'gsap/GSDevTools';
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(GSDevTools);
 
-import { ExpandableCards, Accordion } from '@/components';
+import { ExpandableCards, Accordion, CardsShuffle } from '@/components';
 
 function createSplitText(selector: string, type: 'chars' | 'lines' | 'words') {
     const config = { type, mask: type };
@@ -167,19 +167,19 @@ export default function Home() {
                 {/* Preloader Progress */}
                 <div
                     data-gsap='preloader-progress-bar-container'
-                    className='fixed inset-0 flex justify-center items-center pointer-events-none z-10'
+                    className='pointer-events-none fixed inset-0 z-10 flex items-center justify-center'
                 >
                     {/* Preloader Progress Bar */}
-                    <div className='relative w-fit h-fit px-12 rounded-huge overflow-clip'>
+                    <div className='relative h-fit w-fit overflow-clip rounded-huge px-12'>
                         {/* Preloader Logo */}
 
                         <div
                             data-gsap='preloader-progress-bar'
-                            className='absolute inset-0 bg-secondary will-change-transform transform scale-x-0 origin-left z-0'
+                            className='absolute inset-0 z-0 origin-left scale-x-0 transform bg-secondary will-change-transform'
                         ></div>
                         <h1
                             data-gsap='preloader-text'
-                            className='text-display-small md:text-display-medium xl:text-display-large text-center text-primary z-50'
+                            className='z-50 text-center text-display-small text-primary md:text-display-medium xl:text-display-large'
                         >
                             Obsidian
                         </h1>
@@ -192,17 +192,17 @@ export default function Home() {
                     className='relative h-full w-full opacity-0'
                 >
                     {/* Hero Content */}
-                    <div className='absolute w-full h-full flex justify-center items-center'>
+                    <div className='absolute flex h-full w-full items-center justify-center'>
                         <h1
                             data-gsap='welcome-text'
-                            className='text-display-large leading-36 z-5'
+                            className='z-5 text-display-large leading-36'
                         >
                             Welcome to Obsidian
                         </h1>
                     </div>
 
                     {/* Links */}
-                    <div data-gsap='links' className='absolute p-12 z-5'>
+                    <div data-gsap='links' className='absolute z-5 p-12'>
                         <div className='contact-btn'>Contact</div>
                         <div className='menu-btn'>Menu</div>
                     </div>
@@ -210,9 +210,9 @@ export default function Home() {
                     {/* Hero Image */}
                     <div
                         data-gsap='hero-image'
-                        className='transform scale-125 will-change-transform absolute top-0 left-0 w-full h-full -z-1'
+                        className='absolute top-0 left-0 -z-1 h-full w-full scale-125 transform will-change-transform'
                     >
-                        <div className='absolute inset-0 bg-radial from-transparent from-20% to-primary z-5'></div>
+                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary'></div>
                         <Image
                             src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
                             alt='Logo'
@@ -224,16 +224,16 @@ export default function Home() {
                     </div>
 
                     {/* Hero Footer */}
-                    <div className='absolute bottom-0 w-full p-12 flex justify-between items-start z-5 '>
+                    <div className='absolute bottom-0 z-5 flex w-full items-start justify-between p-12'>
                         <h3
                             data-gsap='hero-footer-heading'
-                            className='text-title-large left-0 w-1/4'
+                            className='left-0 w-1/4 text-title-large'
                         >
                             Spaces defined through light and silence
                         </h3>
                         <p
                             data-gsap='hero-footer-paragraph'
-                            className='text-body-medium w-1/4 text-right'
+                            className='w-1/4 text-right text-body-medium'
                         >
                             lorem ipsum Lorem ipsum dolor sit amet consectetur
                             adipisicing elit. Id error architecto dolores porro
@@ -244,6 +244,7 @@ export default function Home() {
             </div>
             <ExpandableCards />
             <Accordion />
+            <CardsShuffle />
         </>
     );
 }
