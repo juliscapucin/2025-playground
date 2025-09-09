@@ -1,17 +1,19 @@
 // components/Accordion.js
 import { useEffect, useState } from 'react';
 
+import { IconChevron } from '@/components/icons';
+
 const items = [
     {
-        title: 'Title for Tab - 1',
+        title: 'First Title for Tab',
         content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
-        title: 'Title for Tab - 2',
+        title: 'Second Title for Tab',
         content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
     {
-        title: 'Title for Tab - 3',
+        title: 'Third Title for Tab',
         content: 'Lorem ipsum dolor sit amet consectetur adipisicing elit...',
     },
 ];
@@ -45,14 +47,14 @@ export default function Accordion() {
                 return (
                     <div
                         key={index}
-                        className='accordion-item mb-4 overflow-hidden rounded-full'
+                        className='accordion-item mb-4 overflow-hidden border-y border-secondary'
                     >
                         <button
                             onClick={() => setOpenIndex(isOpen ? -1 : index)} // Toggle open state
                             aria-expanded={isOpen}
                             aria-controls={`accordion-content-${index}`}
                             id={`accordion-header-${index}`}
-                            className='relative flex w-full cursor-pointer items-center justify-between bg-secondary px-4 py-3 pr-10 text-left text-primary transition duration-500 focus:bg-gray-700 focus:text-white focus:outline-none'
+                            className='relative flex w-full cursor-pointer items-center justify-between bg-secondary/10 px-4 py-3 pr-10 text-left text-secondary uppercase transition duration-500 focus:bg-secondary/50 focus:text-primary'
                         >
                             {item.title}
 
@@ -60,7 +62,9 @@ export default function Accordion() {
                             <span
                                 className={`inline-flex h-8 w-8 transform items-center justify-center rounded-full border border-gray-700 transition duration-500 ${isOpen ? '-rotate-180 text-white' : ''}`}
                             >
-                                <i className='fas fa-chevron-down' />
+                                <IconChevron
+                                    direction={isOpen ? 'up' : 'down'}
+                                />
                             </span>
                         </button>
                         <div
