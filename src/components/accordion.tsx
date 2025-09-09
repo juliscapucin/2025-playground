@@ -45,28 +45,28 @@ export default function Accordion() {
                 return (
                     <div
                         key={index}
-                        className='accordion-item rounded-full overflow-hidden mb-4'
+                        className='accordion-item mb-4 overflow-hidden rounded-full'
                     >
                         <button
                             onClick={() => setOpenIndex(isOpen ? -1 : index)} // Toggle open state
                             aria-expanded={isOpen}
                             aria-controls={`accordion-content-${index}`}
                             id={`accordion-header-${index}`}
-                            className='w-full bg-secondary text-left text-primary flex justify-between items-center px-4 py-3 cursor-pointer pr-10 relative transition duration-500 focus:outline-none focus:text-white focus:bg-gray-700'
+                            className='relative flex w-full cursor-pointer items-center justify-between bg-secondary px-4 py-3 pr-10 text-left text-primary transition duration-500 focus:bg-gray-700 focus:text-white focus:outline-none'
                         >
                             {item.title}
 
                             {/* Chevron Icon */}
                             <span
-                                className={`h-8 w-8 border border-gray-700 rounded-full inline-flex items-center justify-center transform transition duration-500 ${isOpen ? '-rotate-180 text-white' : ''}`}
+                                className={`inline-flex h-8 w-8 transform items-center justify-center rounded-full border border-gray-700 transition duration-500 ${isOpen ? '-rotate-180 text-white' : ''}`}
                             >
                                 <i className='fas fa-chevron-down' />
                             </span>
                         </button>
                         <div
-                            className={`bg-gray-800 px-4 overflow-hidden transition-[max-height] duration-500 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
+                            className={`overflow-hidden bg-gray-800 px-4 transition-[max-height] duration-500 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
                         >
-                            <p className='p-2 text-gray-400 text-justify'>
+                            <p className='p-2 text-justify text-gray-400'>
                                 {item.content}
                             </p>
                         </div>
