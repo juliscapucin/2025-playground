@@ -1,7 +1,7 @@
-// components/Accordion.js
 import { useEffect, useState } from 'react';
 
 import { IconChevron } from '@/components/icons';
+import { Heading } from './ui';
 
 const items = [
     {
@@ -41,7 +41,10 @@ export default function Accordion() {
     }, []);
 
     return (
-        <div className='container mx-auto my-8 px-4'>
+        <div className='container mx-auto my-32 px-4'>
+            <Heading tag='h2' variant='headline'>
+                Accordion
+            </Heading>
             {items.map((item, index) => {
                 const isOpen = openIndex === index;
                 return (
