@@ -42,7 +42,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} antialiased container mx-auto relative w-full h-svh p-8 bg-primary text-secondary font-secondary font-light overflow-clip`}
+                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} antialiased max-w-[1800px] mx-auto relative w-full h-svh p-8 bg-primary text-secondary font-secondary font-light overflow-clip`}
             >
                 {children}
             </body>
