@@ -51,7 +51,7 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mx-auto mb-32 w-full max-w-[1800px] overflow-x-clip bg-primary p-8 font-secondary font-light text-secondary antialiased`}
+                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mx-auto mb-32 w-full max-w-[1800px] overflow-x-clip bg-primary px-8 font-secondary font-light text-secondary antialiased`}
             >
                 <Header navLinks={navLinks} />
                 {children}
