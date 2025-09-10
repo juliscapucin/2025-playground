@@ -37,7 +37,7 @@ export default function ExpandableCards() {
                 <Heading tag='h2' variant='headline' classes='flex-2'>
                     Plan ahead for every season
                 </Heading>
-                <p className='mx-auto mt-4 mb-8 max-w-sm text-secondary/70'>
+                <p className='mx-auto mt-4 mb-8 max-w-sm text-balance text-secondary/70'>
                     Discover what each season brings, from spring blooms to
                     winter trails, and make the most of your visit year-round.
                 </p>
