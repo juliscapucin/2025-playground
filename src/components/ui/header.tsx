@@ -2,21 +2,20 @@
 
 import { usePathname } from 'next/navigation';
 
-import { CustomButton, NavLink } from '@/components/ui';
+import { CustomButton, MenuMobile, NavLink } from '@/components/ui';
 import { NavLink as NavLinkType } from '@/types';
 
 type HeaderProps = {
     navLinks: NavLinkType[];
 };
 
-// This is the header component for the desktop version
-// Mobile version is handled in menuMobile.tsx
 export default function Header({ navLinks }: HeaderProps) {
     const pathname = usePathname();
 
     return (
         <header className='fixed top-0 right-0 left-0 z-50'>
-            <nav className='h-16 justify-between overflow-clip border-b bg-primary px-8 py-4 lg:flex'>
+            <MenuMobile navLinks={navLinks} />
+            <nav className='h-16 justify-between overflow-clip border-b bg-primary px-8 py-4 md:hidden lg:flex'>
                 {/* LOGO */}
                 <CustomButton
                     slug='/'

@@ -119,7 +119,7 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-1/2 w-full lg:h-[50vw]'
+            className='relative mx-auto my-32 h-svh w-full lg:h-[50vw]'
         >
             <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center'>
                 <Heading
@@ -137,7 +137,7 @@ export default function Carousel() {
                 {cardsData.map((card, index) => (
                     <div
                         key={index}
-                        className={`card absolute aspect-square w-[35vw] cursor-pointer overflow-hidden rounded-md bg-cover bg-center lg:w-[25vw]`}
+                        className={`card absolute aspect-square w-[r0vw] cursor-pointer overflow-hidden rounded-md bg-cover bg-center md:w-[35vw] lg:w-[25vw]`}
                         onMouseEnter={(e) => cardTossAnimation(e)}
                     >
                         <Image

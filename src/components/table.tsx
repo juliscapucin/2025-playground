@@ -15,7 +15,7 @@ export default function Table() {
                 What you can do at Obsidian Park
             </Heading>
 
-            <ul className='mt-8 flex justify-center *:flex-1 *:border-secondary/10 *:not-first:pl-4 *:not-last:border-r *:not-last:pr-4'>
+            <ul className='mt-8 justify-center *:flex-1 *:border-secondary/10 *:not-first:pt-4 *:not-last:border-b *:not-last:pb-4 lg:flex lg:*:not-first:pt-0 lg:*:not-first:pl-4 lg:*:not-last:border-0 lg:*:not-last:border-r lg:*:not-last:pr-4'>
                 {amenities.map((amenity, index) => (
                     <li key={index}>{amenity}</li>
                 ))}
