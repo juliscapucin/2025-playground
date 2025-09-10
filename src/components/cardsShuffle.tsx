@@ -21,19 +21,18 @@ const cardsData = [
 
 const cardsShuffleAnimation = (cards: HTMLElement[]) => {
     const tl = gsap.timeline();
+
+    gsap.set(cards, { xPercent: 0, yPercent: 0 });
+
     tl.fromTo(
         cards,
         {
             rotation: 0,
             scale: 0,
-            x: 0,
-            y: 0,
         },
         {
             rotation: () => gsap.utils.random(-15, 15),
             scale: 0.8,
-            x: 0,
-            y: 0,
             duration: 1,
             ease: 'power2.out',
             stagger: 0.1,
@@ -68,6 +67,11 @@ const cardTossAnimation = (e: React.MouseEvent<HTMLDivElement>) => {
                 velocity: -300,
                 max: 20,
                 min: 0,
+            },
+            rotation: {
+                velocity: gsap.utils.random(-50, 50),
+                max: 20,
+                min: -20,
             },
         },
     });
@@ -115,7 +119,7 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-1/2 w-full overflow-clip rounded-3xl border border-secondary/10 lg:h-[50vw]'
+            className='relative mx-auto my-32 h-1/2 w-full lg:h-[50vw]'
         >
             <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center'>
                 <Heading
