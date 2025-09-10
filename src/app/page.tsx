@@ -11,6 +11,7 @@ gsap.registerPlugin(GSDevTools);
 
 import { ExpandableCards, Accordion, CardsShuffle } from '@/components';
 import { animateSplitText } from '@/lib/animations';
+import { Heading, Subtitle } from '@/components/ui';
 
 function animatedProgressBar() {
     const tl = gsap.timeline();
@@ -135,82 +136,84 @@ export default function Home() {
 
     return (
         <>
-            <div ref={outerContainerRef} className='relative h-svh w-full'>
-                {/* Preloader Progress */}
-                <div
-                    data-gsap='preloader-progress-bar-container'
-                    className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center'
-                >
-                    {/* Preloader Progress Bar */}
-                    <div className='relative h-fit w-fit overflow-clip rounded-huge px-12'>
-                        {/* Preloader Logo */}
-
-                        <div
-                            data-gsap='preloader-progress-bar'
-                            className='absolute inset-0 z-0 origin-left scale-x-0 transform bg-secondary will-change-transform'
-                        ></div>
-                        <h1
-                            data-gsap='preloader-text'
-                            className='z-50 text-center text-display-small text-primary md:text-display-medium xl:text-display-large'
-                        >
-                            Obsidian
-                        </h1>
-                    </div>
-                </div>
-
-                {/* Hero */}
-                <div
-                    data-gsap='mask'
-                    className='relative h-full w-full opacity-0'
-                >
-                    {/* Hero Content */}
-                    <div className='absolute flex h-full w-full items-center justify-center'>
-                        <h1
-                            data-gsap='welcome-text'
-                            className='z-5 text-display-large leading-36'
-                        >
-                            Welcome to Obsidian
-                        </h1>
-                    </div>
-
-                    {/* Links */}
-                    <div data-gsap='links' className='absolute z-5 p-12'>
-                        <div className='contact-btn'>Contact</div>
-                        <div className='menu-btn'>Menu</div>
-                    </div>
-
-                    {/* Hero Image */}
+            <div className='relative flex h-svh w-full flex-col items-stretch justify-stretch'>
+                <div ref={outerContainerRef} className='relative h-full w-full'>
+                    {/* Preloader Progress */}
                     <div
-                        data-gsap='hero-image'
-                        className='absolute top-0 left-0 -z-1 h-full w-full scale-125 transform will-change-transform'
+                        data-gsap='preloader-progress-bar-container'
+                        className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center'
                     >
-                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary'></div>
-                        <Image
-                            src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
-                            alt='Logo'
-                            fill
-                            style={{ objectFit: 'cover' }}
-                            priority
-                            sizes='(max-width: 768px) 100vw'
-                        />
+                        {/* Preloader Progress Bar */}
+                        <div className='relative h-fit w-fit overflow-clip rounded-huge px-12'>
+                            {/* Preloader Logo */}
+
+                            <div
+                                data-gsap='preloader-progress-bar'
+                                className='absolute inset-0 z-0 origin-left scale-x-0 transform bg-secondary will-change-transform'
+                            ></div>
+                            <Heading
+                                tag='h1'
+                                variant='display'
+                                data-gsap='preloader-text'
+                                className='z-50 text-center text-display-small text-primary md:text-display-medium xl:text-display-large'
+                            >
+                                Obsidian
+                            </Heading>
+                        </div>
                     </div>
 
-                    {/* Hero Footer */}
-                    <div className='absolute bottom-0 z-5 flex w-full items-start justify-between p-12'>
-                        <h3
-                            data-gsap='hero-footer-heading'
-                            className='left-0 w-1/4 text-title-large'
+                    {/* Hero */}
+                    <div
+                        data-gsap='mask'
+                        className='relative h-full w-full opacity-0'
+                    >
+                        {/* Hero Content */}
+                        <div className='absolute flex h-full w-full items-center justify-center'>
+                            <Heading
+                                tag='h1'
+                                data-gsap='welcome-text'
+                                classes='z-5 text-display-large leading-36'
+                                variant='display'
+                            >
+                                Welcome to Obsidian
+                            </Heading>
+                        </div>
+
+                        {/* Hero Image */}
+                        <div
+                            data-gsap='hero-image'
+                            className='absolute top-0 left-0 -z-1 h-full w-full scale-125 transform will-change-transform'
                         >
-                            Spaces defined through light and silence
-                        </h3>
-                        <p
-                            data-gsap='hero-footer-paragraph'
-                            className='w-1/4 text-right text-body-medium'
-                        >
-                            lorem ipsum Lorem ipsum dolor sit amet consectetur
-                            adipisicing elit. Id error architecto dolores porro
-                            quae possimus sequi adipisci pariatur.
-                        </p>
+                            <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary'></div>
+                            <Image
+                                src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
+                                alt='Logo'
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                priority
+                                sizes='(max-width: 768px) 100vw'
+                            />
+                        </div>
+
+                        {/* Hero Footer */}
+                        <div className='absolute inset-0 z-5 flex w-full items-start justify-between p-12 lg:items-end'>
+                            <Subtitle
+                                tag='h2'
+                                data-gsap='hero-footer-heading'
+                                classes='left-0 w-1/4'
+                            >
+                                Spaces defined through light and silence
+                            </Subtitle>
+                            <p
+                                data-gsap='hero-footer-paragraph'
+                                className='w-1/4 text-right text-body-medium'
+                            >
+                                lorem ipsum Lorem ipsum dolor sit amet
+                                consectetur adipisicing elit. Id error
+                                architecto dolores porro quae possimus sequi
+                                adipisci pariatur.
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

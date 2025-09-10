@@ -58,7 +58,7 @@ export default function Accordion() {
                             aria-expanded={isOpen}
                             aria-controls={`accordion-content-${index}`}
                             id={`accordion-header-${index}`}
-                            className='group relative flex w-full cursor-pointer items-center justify-between px-4 py-3 pr-10 text-left font-primary text-secondary transition duration-600 hover:bg-secondary/50 hover:text-primary focus:bg-secondary/50 focus:text-primary'
+                            className='group relative flex w-full cursor-pointer items-center justify-between px-4 py-3 pr-10 text-left font-secondary text-secondary transition duration-600 hover:bg-secondary/50 hover:text-primary focus:bg-secondary/50 focus:text-primary'
                         >
                             {item.title}
 

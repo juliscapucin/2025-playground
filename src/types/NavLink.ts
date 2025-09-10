@@ -1,4 +1,4 @@
 export type NavLink = {
-	title: string
-	slug: string
-}
+    label: string;
+    slug: string;
+};

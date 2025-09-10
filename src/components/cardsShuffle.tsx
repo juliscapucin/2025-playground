@@ -17,6 +17,8 @@ const cardsData = [
     { title: 'Card 4', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
 ];
 
+const cardWidth = '25vw';
+
 const cardsShuffleAnimation = (cards: HTMLElement[]) => {
     const tl = gsap.timeline();
     tl.fromTo(
@@ -24,12 +26,10 @@ const cardsShuffleAnimation = (cards: HTMLElement[]) => {
         {
             rotation: 0,
             scale: 0,
-            opacity: 0,
         },
         {
             rotation: () => gsap.utils.random(-15, 15),
             scale: 0.8,
-            opacity: 1,
             duration: 1,
             ease: 'power2.out',
             stagger: 0.1,
@@ -41,7 +41,7 @@ const cardsShuffleAnimation = (cards: HTMLElement[]) => {
 const cardsExpansionAnimation = (cards: HTMLElement[]) => {
     const tl = gsap.timeline();
     tl.to(cards, {
-        rotation: 0,
+        //   rotation: 0,
         xPercent: gsap.utils.wrap([-50, -100, 0, 100, 50]),
         yPercent: gsap.utils.wrap([100, 50, 0, 50, 100]),
         duration: 1,
@@ -84,7 +84,8 @@ export default function Carousel() {
                     ),
                     '<0.4' // start 0.4 seconds before the previous animation ends
                 )
-                .add(cardsExpansionAnimation(cards), '+0.2');
+                // Expand cards
+                .add(cardsExpansionAnimation(cards), '>');
         }, container);
         return () => ctx.revert();
     }, []);
@@ -92,9 +93,9 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-[80svh] w-full rounded-3xl bg-secondary/5'
+            className='relative mx-auto my-32 h-[70vw] w-full rounded-3xl bg-secondary/5 lg:h-[50vw]'
         >
-            <div className='pointer-events-none absolute z-10 flex h-full w-full items-start justify-center'>
+            <div className='pointer-events-none absolute z-10 flex h-full w-full items-center justify-center'>
                 <Heading
                     tag='h2'
                     variant='display'
@@ -110,7 +111,7 @@ export default function Carousel() {
                 {cardsData.map((card, index) => (
                     <div
                         key={index}
-                        className='card absolute aspect-square w-[30vw] cursor-pointer overflow-hidden rounded-md bg-cover bg-center opacity-0'
+                        className={`card absolute aspect-square w-[35vw] cursor-pointer overflow-hidden rounded-md bg-cover bg-center lg:w-[25vw]`}
                     >
                         <Image
                             src={card.src}

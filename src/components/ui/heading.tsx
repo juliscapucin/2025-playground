@@ -1,9 +1,9 @@
-import type { JSX } from 'react';
 type HeadingProps = React.HTMLAttributes<HTMLHeadingElement> & {
     tag: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
     classes?: string;
     children: React.ReactNode;
     variant: 'display' | 'headline' | 'title';
+    font?: 'primary' | 'secondary';
 };
 
 export default function Heading({
@@ -11,6 +11,7 @@ export default function Heading({
     classes,
     children,
     variant,
+    font,
     ...props
 }: HeadingProps) {
     const Tag = tag;
@@ -19,19 +20,19 @@ export default function Heading({
     switch (variant) {
         case 'display':
             headingStyles =
-                'text-display-small md:text-display-medium lg:text-display-large font-medium uppercase';
+                'text-display-small md:text-display-medium lg:text-display-large font-medium';
             break;
         case 'headline':
             headingStyles =
-                'text-headline-small md:text-headline-medium lg:text-headline-large font-medium uppercase';
+                'text-headline-small md:text-headline-medium lg:text-headline-large font-medium';
             break;
         case 'title':
             headingStyles =
-                'text-title-small md:text-title-medium lg:text-title-large uppercase';
+                'text-title-small md:text-title-medium lg:text-title-large';
             break;
         default:
             headingStyles =
-                'text-display-small md:text-display-medium lg:text-display-large uppercase';
+                'text-display-small md:text-display-medium lg:text-display-large';
             break;
     }
 
@@ -39,7 +40,7 @@ export default function Heading({
         <Tag
             className={`${
                 classes ? classes : ''
-            } ${headingStyles} leading-none font-extralight tracking-tight`}
+            } ${headingStyles} ${font ? `font-${font}` : 'font-primary'} leading-none font-extralight tracking-tight`}
             {...props}
         >
             {children}

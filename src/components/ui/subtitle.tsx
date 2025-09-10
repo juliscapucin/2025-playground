@@ -1,65 +1,24 @@
-"use client";
-
-import { useLayoutEffect, useRef } from "react";
-
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-
-const animateSubtitle = (element: HTMLParagraphElement, duration: number) => {
-   const tl = gsap.timeline();
-   tl.fromTo(
-      element,
-      { opacity: 0, y: 50 },
-      { opacity: 1, y: 0, duration: duration / 1000 },
-   );
-   return tl;
+type SubtitleProps = React.HTMLAttributes<HTMLHeadingElement> & {
+    tag: 'h2' | 'h3' | 'h4' | 'h5' | 'h6';
+    classes?: string;
+    font?: 'primary' | 'secondary';
+    children: React.ReactNode;
 };
 
-type SubtitleProps = {
-   subtitle: string;
-};
-
-export default function Subtitle({ subtitle }: SubtitleProps) {
-   const subtitleRef = useRef<HTMLParagraphElement | null>(null);
-   const ctx = gsap.context(() => {});
-
-   // useLayoutEffect(() => {
-   // 	if (!subtitleRef.current) return
-
-   // 	gsap.registerPlugin(ScrollTrigger)
-
-   // 	const element = subtitleRef.current as HTMLParagraphElement
-   // 	const parentElement = element.closest("section") as HTMLDivElement
-
-   // 	const offsetLeft = () => parentElement!.offsetLeft
-   // 	const width = () => parentElement!.offsetWidth
-
-   // 	let fastScrollEnd = true
-
-   // 	ctx.add(() => {
-   // 		ScrollTrigger.create({
-   // 			trigger: element,
-   // 			start: () => `${offsetLeft()}px bottom`,
-   // 			end: () => `+=${width()}`,
-   // 			invalidateOnRefresh: true,
-   // 			animation: animateSubtitle(element, 300),
-   // 			toggleActions: "play none none reverse",
-   // 			fastScrollEnd: fastScrollEnd,
-   // 			// markers: true,
-   // 			onUpdate: (self) => {
-   // 				// define fastScrollEnd depending on scroll direction
-   // 				self.direction === 1
-   // 					? (fastScrollEnd = true)
-   // 					: (fastScrollEnd = false)
-   // 			},
-   // 		})
-   // 	})
-
-   // 	return () => ctx.revert()
-   // }, [])
-   return (
-      <p className="block mb-8 max-w-prose" ref={subtitleRef}>
-         {subtitle}
-      </p>
-   );
+export default function Subtitle({
+    tag,
+    classes,
+    children,
+    font,
+    ...props
+}: SubtitleProps) {
+    const Tag = tag;
+    return (
+        <Tag
+            className={`mb-8 block max-w-prose text-title-small md:text-title-medium lg:text-title-large ${font ? `font-${font}` : ''} ${classes ? classes : ''} leading-snug font-light`}
+            {...props}
+        >
+            {children}
+        </Tag>
+    );
 }

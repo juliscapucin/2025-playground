@@ -3,6 +3,15 @@ import localFont from 'next/font/local';
 import { Geist, Geist_Mono, Noto_Sans } from 'next/font/google';
 import './globals.css';
 
+import { Header } from '@/components/ui';
+
+const navLinks = [
+    { label: 'Home', slug: '#' },
+    { label: 'About', slug: '#' },
+    { label: 'Services', slug: '#' },
+    { label: 'Contact', slug: '#' },
+];
+
 const noto = Noto_Sans({
     variable: '--font-noto',
     subsets: ['latin'],
@@ -44,6 +53,7 @@ export default function RootLayout({
             <body
                 className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mx-auto mb-32 w-full max-w-[1800px] overflow-x-clip bg-primary p-8 font-secondary font-light text-secondary antialiased`}
             >
+                <Header navLinks={navLinks} />
                 {children}
             </body>
         </html>
