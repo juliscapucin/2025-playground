@@ -30,6 +30,8 @@
     --text-label-large: 14px;
     --text-label-medium: 12px;
     --text-label-small: 10px;
+
+    --max-width: 1400px;
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

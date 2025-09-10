@@ -30,47 +30,48 @@ export default function ExpandableCards() {
     const [activeIdx, setActiveIdx] = useState(0);
 
     return (
-        <div className='mx-auto my-64 flex h-96 w-full gap-4 overflow-hidden'>
-            <div>
+        <div className='mx-auto my-64 max-w-5xl'>
+            <div className='text-center'>
                 <Heading tag='h2' variant='headline' classes='flex-2'>
-                    Seasons
+                    Plan ahead for every season
                 </Heading>
-                <p className='mt-4 max-w-sm text-secondary/70'>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed
-                    do eiusmod tempor incididunt ut labore et dolore magna
-                    aliqua.
+                <p className='mx-auto mt-4 mb-8 max-w-sm text-secondary/70'>
+                    Discover what each season brings, from spring blooms to
+                    winter trails, and make the most of your visit year-round.
                 </p>
             </div>
-            {cards.map((card, index) => (
-                <div
-                    key={index}
-                    onMouseEnter={() => setActiveIdx(index)}
-                    onMouseLeave={() => setActiveIdx(-1)}
-                    className={`relative flex-none cursor-pointer overflow-clip rounded-3xl transition-all duration-500 ${activeIdx === index ? 'grow-[10]' : 'grow'} `}
-                >
-                    <div className='absolute inset-0'>
-                        <Image
-                            src={card.image}
-                            alt={card.title}
-                            fill
-                            style={{ objectFit: 'cover' }}
-                            sizes='(max-width: 768px) 30vw'
-                        />
-                    </div>
+            <div className='flex h-96 w-full gap-4 overflow-hidden'>
+                {cards.map((card, index) => (
+                    <div
+                        key={index}
+                        onMouseEnter={() => setActiveIdx(index)}
+                        onMouseLeave={() => setActiveIdx(-1)}
+                        className={`relative flex-none cursor-pointer overflow-clip rounded-3xl transition-all duration-500 ${activeIdx === index ? 'grow-[10]' : 'grow'} `}
+                    >
+                        <div className='absolute inset-0'>
+                            <Image
+                                src={card.image}
+                                alt={card.title}
+                                fill
+                                style={{ objectFit: 'cover' }}
+                                sizes='(max-width: 768px) 30vw'
+                            />
+                        </div>
 
-                    {/* Label */}
-                    <div className='absolute bottom-4 left-4 flex items-center gap-4 text-secondary'>
-                        <div className='rounded-full bg-primary px-4 py-1 uppercase'>
-                            {card.title}
-                        </div>
-                        <div
-                            className={`text-body-medium text-nowrap transition-opacity duration-300 ${activeIdx === index ? 'opacity-100' : 'opacity-0'}`}
-                        >
-                            {card.subtitle}
+                        {/* Label */}
+                        <div className='absolute bottom-4 left-4 flex items-center gap-4 text-secondary'>
+                            <div className='rounded-full bg-primary px-4 py-1 uppercase'>
+                                {card.title}
+                            </div>
+                            <div
+                                className={`text-body-medium text-nowrap transition-opacity duration-300 ${activeIdx === index ? 'opacity-100' : 'opacity-0'}`}
+                            >
+                                {card.subtitle}
+                            </div>
                         </div>
                     </div>
-                </div>
-            ))}
+                ))}
+            </div>
         </div>
     );
 }

@@ -1,0 +1,25 @@
+import { Heading } from '@/components/ui';
+
+const amenities = [
+    'Hike along forest and lake trails',
+    'Swim in the lake or nearby beaches',
+    'Kayak, canoe, or paddleboard',
+    'Picnic or barbecue in designated areas',
+    'Attend outdoor concerts and events',
+];
+
+export default function Table() {
+    return (
+        <div className='mx-auto my-32 w-fit max-w-5xl rounded-3xl border border-secondary/10 p-8'>
+            <Heading tag='h2' variant='headline'>
+                What you can do at Obsidian Park
+            </Heading>
+
+            <ul className='mt-8 flex justify-center *:flex-1 *:border-secondary/10 *:not-first:pl-4 *:not-last:border-r *:not-last:pr-4'>
+                {amenities.map((amenity, index) => (
+                    <li key={index}>{amenity}</li>
+                ))}
+            </ul>
+        </div>
+    );
+}

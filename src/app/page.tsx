@@ -9,7 +9,7 @@ import { GSDevTools } from 'gsap/GSDevTools';
 gsap.registerPlugin(SplitText);
 gsap.registerPlugin(GSDevTools);
 
-import { ExpandableCards, Accordion, CardsShuffle } from '@/components';
+import { ExpandableCards, Accordion, CardsShuffle, Table } from '@/components';
 import { animateSplitText } from '@/lib/animations';
 import { Heading, Subtitle } from '@/components/ui';
 
@@ -202,21 +202,23 @@ export default function Home() {
                                 data-gsap='hero-footer-heading'
                                 classes='left-0 w-1/4'
                             >
-                                Spaces defined through light and silence
+                                Endless opportunities to connect with nature
                             </Subtitle>
                             <p
                                 data-gsap='hero-footer-paragraph'
                                 className='w-1/4 text-right text-body-medium'
                             >
-                                lorem ipsum Lorem ipsum dolor sit amet
-                                consectetur adipisicing elit. Id error
-                                architecto dolores porro quae possimus sequi
-                                adipisci pariatur.
+                                Home to pristine forests, sparkling lakes, and a
+                                rich diversity of wildlife. Whether you come to
+                                wander the trails, rest by the water, or enjoy
+                                the stillness of the wilderness, the park offers
+                                space to slow down and reconnect.
                             </p>
                         </div>
                     </div>
                 </div>
             </div>
+            <Table />
             <ExpandableCards />
             <CardsShuffle />
             <Accordion />

@@ -67,7 +67,7 @@ export default function Carousel() {
                 // ScrollTrigger
                 scrollTrigger: {
                     trigger: container,
-                    start: 'top 20%',
+                    start: 'top 10%',
                     scrub: 1,
                     pin: true,
                 },
@@ -93,7 +93,7 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-[70vw] w-full rounded-3xl bg-secondary/5 lg:h-[50vw]'
+            className='relative mx-auto my-32 h-[70vw] w-full rounded-3xl border border-secondary/10 py-8 lg:h-[50vw]'
         >
             <div className='pointer-events-none absolute z-10 flex h-full w-full items-center justify-center'>
                 <Heading
@@ -101,7 +101,7 @@ export default function Carousel() {
                     variant='display'
                     data-gsap='cards-shuffle-heading'
                 >
-                    Collections
+                    Photo Galleries
                 </Heading>
             </div>
             <div
