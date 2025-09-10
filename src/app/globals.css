@@ -52,4 +52,17 @@
     h1 {
         font-family: var(--font-acma);
     }
+
+    .underlined-link {
+        @apply relative inline-block w-fit cursor-pointer overflow-x-clip text-secondary uppercase no-underline;
+    }
+
+    .underlined-link::after {
+        @apply absolute bottom-[2px] left-0 z-50 h-px w-full -translate-x-[102%] bg-secondary transition-transform duration-300 content-[''];
+    }
+
+    .underlined-link:hover::after,
+    .active.underlined-link::after {
+        @apply translate-x-0;
+    }
 }

@@ -1,14 +1,14 @@
-import Link from "next/link"
+import Link from 'next/link';
 
 type CustomLinkProps = {
-	href: string
-	label: string
-}
+    href: string;
+    children?: React.ReactNode;
+};
 
-export default function CustomLink({ href, label }: CustomLinkProps) {
-	return (
-		<Link className='custom-button-rounded' href={href} target='_blank'>
-			{label}
-		</Link>
-	)
+export default function CustomLink({ href, children }: CustomLinkProps) {
+    return (
+        <Link className='custom-button-rounded' href={href} target='_blank'>
+            {children}
+        </Link>
+    );
 }

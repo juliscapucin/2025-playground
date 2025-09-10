@@ -133,7 +133,7 @@ export default function Hero() {
         return () => ctx.revert();
     }, []);
     return (
-        <div className='relative flex h-svh w-full flex-col items-stretch justify-stretch'>
+        <div className='pointer-events-none relative flex h-svh w-full flex-col items-stretch justify-stretch'>
             <div
                 ref={outerContainerRef}
                 className='relative mt-16 h-full w-full'

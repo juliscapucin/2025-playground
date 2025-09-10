@@ -6,10 +6,10 @@ import './globals.css';
 import { Header } from '@/components/ui';
 
 const navLinks = [
-    { label: 'Home', slug: '#' },
-    { label: 'About', slug: '#' },
-    { label: 'Services', slug: '#' },
-    { label: 'Contact', slug: '#' },
+    { label: 'Home', slug: '/' },
+    { label: 'About', slug: '/about' },
+    { label: 'Program', slug: '/program' },
+    { label: 'Contact', slug: '/contact' },
 ];
 
 const noto = Noto_Sans({

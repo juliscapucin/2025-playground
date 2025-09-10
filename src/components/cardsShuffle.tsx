@@ -19,8 +19,6 @@ const cardsData = [
     { title: 'Card 4', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
 ];
 
-const cardWidth = '25vw';
-
 const cardsShuffleAnimation = (cards: HTMLElement[]) => {
     const tl = gsap.timeline();
     tl.fromTo(
@@ -28,10 +26,14 @@ const cardsShuffleAnimation = (cards: HTMLElement[]) => {
         {
             rotation: 0,
             scale: 0,
+            x: 0,
+            y: 0,
         },
         {
             rotation: () => gsap.utils.random(-15, 15),
             scale: 0.8,
+            x: 0,
+            y: 0,
             duration: 1,
             ease: 'power2.out',
             stagger: 0.1,
@@ -51,6 +53,24 @@ const cardsExpansionAnimation = (cards: HTMLElement[]) => {
         stagger: 0.1,
     });
     return tl;
+};
+
+const cardTossAnimation = (e: React.MouseEvent<HTMLDivElement>) => {
+    const card = e.currentTarget;
+    gsap.to(card, {
+        inertia: {
+            x: {
+                velocity: 500,
+                max: 20,
+                min: 0,
+            },
+            y: {
+                velocity: -300,
+                max: 20,
+                min: 0,
+            },
+        },
+    });
 };
 
 export default function Carousel() {
@@ -95,9 +115,9 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-[70vw] w-full rounded-3xl border border-secondary/10 py-8 lg:h-[50vw]'
+            className='relative mx-auto my-32 h-1/2 w-full overflow-clip rounded-3xl border border-secondary/10 lg:h-[50vw]'
         >
-            <div className='pointer-events-none absolute z-10 flex h-full w-full items-center justify-center'>
+            <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center'>
                 <Heading
                     tag='h2'
                     variant='display'
@@ -114,6 +134,7 @@ export default function Carousel() {
                     <div
                         key={index}
                         className={`card absolute aspect-square w-[35vw] cursor-pointer overflow-hidden rounded-md bg-cover bg-center lg:w-[25vw]`}
+                        onMouseEnter={(e) => cardTossAnimation(e)}
                     >
                         <Image
                             src={card.src}
