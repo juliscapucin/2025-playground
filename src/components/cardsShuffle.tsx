@@ -44,7 +44,6 @@ const cardsShuffleAnimation = (cards: HTMLElement[]) => {
 const cardsExpansionAnimation = (cards: HTMLElement[]) => {
     const tl = gsap.timeline();
     tl.to(cards, {
-        //   rotation: 0,
         xPercent: gsap.utils.wrap([-50, -100, 0, 100, 50]),
         yPercent: gsap.utils.wrap([100, 50, 0, 50, 100]),
         duration: 1,
@@ -94,24 +93,26 @@ export default function Carousel() {
                 scrollTrigger: {
                     trigger: container,
                     start: 'top 10%',
+                    end: '+=400%',
                     scrub: 1,
                     pin: true,
+                    markers: true,
                 },
             });
 
-            tl.add(cardsShuffleAnimation(cards)) // Shuffle cards
+            tl.add(
                 // Text Animation
-                .add(
-                    animateSplitText(
-                        "[data-gsap='cards-shuffle-heading']",
-                        'chars',
-                        1,
-                        0.03
-                    ),
-                    '<0.4' // start 0.4 seconds before the previous animation ends
+                animateSplitText(
+                    "[data-gsap='cards-shuffle-heading']",
+                    'chars',
+                    1,
+                    0.03
                 )
+            )
+                // Shuffle cards
+                .add(cardsShuffleAnimation(cards), '<')
                 // Expand cards
-                .add(cardsExpansionAnimation(cards), '>');
+                .add(cardsExpansionAnimation(cards));
         }, container);
         return () => ctx.revert();
     }, []);
