@@ -39,17 +39,17 @@ const items = [
 ];
 
 export default function Accordion() {
-    const [openIndex, setOpenIndex] = useState(-1);
+    const [openIndex, setOpenIndex] = useState<number | null>(null);
 
     useEffect(() => {
         function closeOnEsc(e: KeyboardEvent | MouseEvent) {
             if (e instanceof KeyboardEvent && e.key === 'Escape') {
-                setOpenIndex(-1);
+                setOpenIndex(null);
             }
         }
         function closeOnClickOutside(e: MouseEvent) {
             if (!(e.target as HTMLElement).closest('.accordion-item')) {
-                setOpenIndex(-1);
+                setOpenIndex(null);
             }
         }
         document.addEventListener('click', closeOnClickOutside);
@@ -74,7 +74,7 @@ export default function Accordion() {
                     >
                         {/* Header */}
                         <button
-                            onClick={() => setOpenIndex(isOpen ? -1 : index)} // Toggle open state
+                            onClick={() => setOpenIndex(isOpen ? null : index)} // Toggle open state
                             aria-expanded={isOpen}
                             aria-controls={`accordion-content-${index}`}
                             id={`accordion-header-${index}`}
@@ -92,7 +92,7 @@ export default function Accordion() {
 
                         {/* Content Area */}
                         <div
-                            className={`overflow-hidden bg-primary transition-[max-height] duration-800 ${isOpen ? 'max-h-screen' : 'max-h-0'}`}
+                            className={`overflow-hidden bg-primary transition-[height] duration-800 ${isOpen ? 'h-fit' : 'h-0'}`}
                         >
                             <p className='mx-4 my-8 text-justify text-secondary'>
                                 {item.content}

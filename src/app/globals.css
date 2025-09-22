@@ -1,6 +1,8 @@
 @import 'tailwindcss';
 
 :root {
+    interpolate-size: allow-keywords;
+
     --primary: oklch(21.3% 0.034 184.9);
     --secondary: oklch(88.669% 0.01899 180.52);
 }
