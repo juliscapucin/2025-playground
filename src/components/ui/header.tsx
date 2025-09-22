@@ -13,7 +13,7 @@ export default function Header({ navLinks }: HeaderProps) {
     const pathname = usePathname();
 
     return (
-        <header className='fixed top-0 right-0 left-0 z-50'>
+        <header className='pointer-events-none fixed top-0 right-0 left-0 z-50'>
             <MenuMobile navLinks={navLinks} />
             <nav className='h-16 justify-between overflow-clip border-b bg-primary px-8 py-4 md:hidden lg:flex'>
                 {/* LOGO */}
