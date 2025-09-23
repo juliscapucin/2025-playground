@@ -2,49 +2,77 @@
 
 import { useState } from 'react';
 import Image from 'next/image';
-import { ImageField } from '@/types/Image';
+import { Image as ImageType } from '@/types';
 
 type ImageWithSpinnerProps = {
-    classes: string;
+    className?: string;
+    wrapperClassName?: string;
+    spinnerClassName?: string;
     sizes: string;
     quality?: number;
     priority?: boolean;
-    image: ImageField;
+    showSpinner?: boolean;
+    altFallback?: string;
+    image: ImageType;
 };
 
 export default function ImageWithSpinner({
-    classes,
-    image,
+    className = '',
+    wrapperClassName = '',
+    spinnerClassName = '',
     sizes,
-    quality,
+    quality = 70,
     priority = false,
+    showSpinner = true,
+    altFallback = '',
+    image,
 }: ImageWithSpinnerProps) {
     const [isLoading, setIsLoading] = useState(true);
-    const { imageRef, imageAlt, imageWidth, imageHeight } = image;
+    const [hasError, setHasError] = useState(false);
+    const { alt, width, height, url } = image;
 
     return (
-        <>
-            {isLoading && (
-                <div className='bg-faded-5 absolute top-0 left-0 flex h-full w-full items-center justify-center'>
-                    <div className='relative aspect-square w-[10%] min-w-12 animate-spin'>
-                        <div className='border-faded absolute top-0 left-0 z-10 h-full w-full rounded-full border border-r-secondary'></div>
-                        <div className='border-faded-30 absolute top-0 left-0 h-full w-full rounded-full border opacity-20'></div>
+        <div
+            className={`relative ${wrapperClassName}`}
+            aria-busy={isLoading}
+            aria-live='polite'
+        >
+            {showSpinner && isLoading && !hasError && (
+                <div
+                    className={`bg-faded-5 absolute inset-0 z-10 grid place-items-center ${spinnerClassName}`}
+                    role='status'
+                    aria-label='Loading image'
+                >
+                    <div className='relative aspect-square w-[10%] min-w-12 motion-safe:animate-spin'>
+                        <div className='border-faded absolute inset-0 z-10 rounded-full border border-r-secondary'></div>
+                        <div className='border-faded-30 absolute inset-0 rounded-full border opacity-20'></div>
                     </div>
+                    <span className='sr-only'>Loading</span>
                 </div>
             )}
-            <Image
-                className={classes}
-                src={'/kristaps-ungurs-4orvBonHMGk-unsplash.jpg'}
-                alt={imageAlt}
-                sizes={sizes}
-                quality={quality ? quality : 70}
-                width={imageWidth}
-                height={imageHeight}
-                onLoad={() => {
-                    setIsLoading(false);
-                }}
-                priority={priority}
-            />
-        </>
+
+            {!hasError ? (
+                <Image
+                    className={className}
+                    src={url}
+                    alt={alt || altFallback}
+                    sizes={sizes}
+                    quality={quality}
+                    width={width}
+                    height={height}
+                    onLoadingComplete={() => setIsLoading(false)}
+                    onError={() => {
+                        setHasError(true);
+                        setIsLoading(false);
+                    }}
+                    priority={priority}
+                />
+            ) : (
+                <div className='bg-faded-5 flex h-full w-full items-center justify-center text-secondary/70'>
+                    <span className='sr-only'>Image failed to load</span>
+                    <span aria-hidden>Image failed to load</span>
+                </div>
+            )}
+        </div>
     );
 }
