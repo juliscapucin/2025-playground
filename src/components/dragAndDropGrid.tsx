@@ -34,6 +34,8 @@ type DragAndDropGridProps = {
     rowHeight?: number;
 };
 
+// === Utils === //
+
 // Build positions dynamically from container size
 function buildGridPositions(
     container: HTMLElement | null,
@@ -63,26 +65,35 @@ function buildGridPositions(
 }
 
 // Animate to new position
-function animateToPosition(element: HTMLElement, position: Position) {
-    gsap.to(element, {
+function animateToNewPosition(
+    card: CardInstance,
+    newCardsCollection: CardData[],
+    setCardsCollection: React.Dispatch<React.SetStateAction<CardData[]>>,
+    isEndDrag = false
+) {
+    gsap.to(card.element, {
         duration: 0.3,
-        x: position.x,
-        y: position.y,
-        width: position.width,
-        height: position.height,
+        x: card.position.x,
+        y: card.position.y,
+        width: card.position.width,
+        height: card.position.height,
+        onComplete: () => {
+            if (isEndDrag) setCardsCollection(newCardsCollection);
+        },
     });
 }
 
 // Handle reordering logic
-function handleChangeIndex(
+function handleReorder(
     cardInstances: CardInstance[],
-    itemIndex: number,
+    item: CardInstance,
     newIndex: number
 ) {
     // Reposition dom elements
-    cardInstances.splice(newIndex, 0, cardInstances.splice(itemIndex, 1)[0]);
+    cardInstances.splice(newIndex, 0, cardInstances.splice(item.index, 1)[0]);
 
     cardInstances.forEach((card, index) => {
+        // Update each card's position
         card.updatePosition(index);
     });
 }
@@ -98,30 +109,59 @@ export default function DragAndDropGrid({
     const cardInstances = useRef<CardInstance[]>([]); // store Card instances
     const [cardsCollection, setCardsCollection] = useState(cardsData);
 
+    // Build positions grid
+    useEffect(() => {
+        positions.current = buildGridPositions(
+            containerRef.current,
+            columns,
+            rows,
+            rowHeight
+        );
+    }, []);
+
+    // Initialize Draggable + positioning + animations
     useEffect(() => {
         if (!containerRef.current) return;
 
         const container = containerRef.current;
 
-        // Create a Card instance for GSAP animations + Draggable
+        // Create a Card instance for positioning + GSAP animations + Draggable
         function createCard(element: HTMLElement, index: number): CardInstance {
-            const content = element.querySelector<HTMLElement>('.card-content');
-
             const card: CardInstance = {
                 position: positions.current[index],
                 element,
                 index,
                 dragger: null,
-                updatePosition: (i) => {
-                    card.index = i;
-                    card.position = positions.current[i];
+                updatePosition: (newIndex) => {
+                    // Create a copy of the current state
+                    const cardsCollectionCopy = [...cardsCollection];
+
+                    // Reorder the copied array
+                    cardsCollectionCopy.splice(
+                        newIndex,
+                        0,
+                        cardsCollectionCopy.splice(card.index, 1)[0]
+                    );
+
+                    // Update card's index and position
+                    card.index = newIndex;
+                    card.position = positions.current[newIndex];
+
+                    // Animate if not dragging
                     if (!card.dragger?.isDragging) {
-                        animateToPosition(card.element, card.position);
+                        animateToNewPosition(
+                            card,
+                            cardsCollectionCopy,
+                            setCardsCollection,
+                            false
+                        );
                     }
                 },
             };
 
-            // Initial position
+            const content = element.querySelector<HTMLElement>('.card-content');
+
+            // Initial positioning
             gsap.set(element, {
                 x: card.position.x,
                 y: card.position.y,
@@ -137,62 +177,54 @@ export default function DragAndDropGrid({
             });
 
             // Draggable config
-            // card.dragger = new Draggable(element, {
-            //     type: 'x,y',
-            //     bounds: container,
-            //     onDragStart() {
-            //         animateStartDrag?.play();
-            //     },
-            //     onDrag() {
-            //         const clampCol = gsap.utils.clamp(0, columns - 1); // ensure within column bounds
-            //         const clampRow = gsap.utils.clamp(0, rows - 1); // ensure within row bounds
+            card.dragger = new Draggable(element, {
+                type: 'x,y',
+                bounds: container,
+                onDragStart() {
+                    animateStartDrag?.play();
+                },
+                onDrag() {
+                    const clampCol = gsap.utils.clamp(0, columns - 1); // ensure within column bounds
+                    const clampRow = gsap.utils.clamp(0, rows - 1); // ensure within row bounds
 
-            //         const col = clampCol(
-            //             Math.round(this.x / card.position.width)
-            //         );
-            //         const row = clampRow(
-            //             Math.round(this.y / card.position.height)
-            //         );
-            //         const newIndex = columns * row + col;
+                    const col = clampCol(
+                        Math.round(this.x / card.position.width)
+                    );
+                    const row = clampRow(
+                        Math.round(this.y / card.position.height)
+                    );
+                    const newIndex = columns * row + col;
 
-            //         if (newIndex !== card.index) {
-            //             handleChangeIndex(
-            //                 cardInstances.current,
-            //                 card,
-            //                 newIndex
-            //             );
-            //         }
-            //     },
-            //     onRelease() {
-            //         animateStartDrag?.reverse();
-            //         animateToPosition(card);
-            //     },
-            // });
+                    if (newIndex !== card.index) {
+                        handleReorder(cardInstances.current, card, newIndex);
+                    }
+                },
+                onRelease() {
+                    animateStartDrag?.reverse();
+                    animateToNewPosition(
+                        card,
+                        cardsCollection,
+                        setCardsCollection,
+                        true
+                    );
+                },
+            });
 
             return card;
         }
 
         // Initialize / Reset
-
         function init() {
-            //   Clear previous drag instances
+            // Clear previous drag instances
             cardInstances.current.forEach((card) => card.dragger?.kill());
 
-            // Build positions grid
-            positions.current = buildGridPositions(
-                containerRef.current,
-                columns,
-                rows,
-                rowHeight
-            );
-
             // Get card elements
-            const cardElements = gsap.utils.toArray<HTMLElement>(
-                '.card',
-                containerRef.current
-            );
+            if (!containerRef.current) return;
+            const cardElements = Array.from(
+                containerRef.current.children
+            ) as HTMLElement[];
 
-            // Create card instances for Draggable + animation
+            // Create card instances for Draggable + positioning + animation
             cardInstances.current = cardElements.map((element, index) =>
                 createCard(element, index)
             );
@@ -222,27 +254,26 @@ export default function DragAndDropGrid({
 
     return (
         <div
-            ref={containerRef}
-            className='relative w-full'
             style={{
                 height: `${rowHeight * Math.ceil(cardsData.length / columns)}px`,
             }}
-            role='grid'
         >
             <div className='sr-only'>
                 Drag and drop the cards to reorder the grid
             </div>
-            {cardsCollection.map((card, index) => (
-                <Card
-                    title={card.title}
-                    content={card.content}
-                    index={index}
-                    key={card.id}
-                    position={positions.current[index]}
-                    columns={columns}
-                    rows={rows}
-                ></Card>
-            ))}
+            <div
+                ref={containerRef}
+                className='relative h-full w-full'
+                role='grid'
+            >
+                {cardsCollection.map((card) => (
+                    <Card
+                        title={card.title}
+                        content={card.content}
+                        key={card.id}
+                    ></Card>
+                ))}
+            </div>
         </div>
     );
 }
@@ -250,65 +281,14 @@ export default function DragAndDropGrid({
 type CardProps = {
     title: string;
     content: string;
-    index: number;
-    position: Position;
-    columns: number;
-    rows: number;
-    cardInstances?: CardInstance[];
 };
 
-function Card({
-    title,
-    content,
-    index,
-    position,
-    columns,
-    rows,
-    cardInstances,
-}: CardProps) {
-    const cardContainerRef = useRef<HTMLDivElement | null>(null);
+function Card({ title, content }: CardProps) {
     const cardContentRef = useRef<HTMLDivElement | null>(null);
-    const [cardPosition, setCardPosition] = useState<Position>(position);
-
-    useEffect(() => {
-        if (!cardContainerRef.current || !cardContentRef.current) return;
-
-        const animateStartDrag = gsap.to(cardContentRef.current, {
-            duration: 0.3,
-            boxShadow: 'rgba(0,0,0,0.25) 0px 16px 32px 0px',
-            scale: 1.05,
-            paused: true,
-        });
-
-        new Draggable(cardContainerRef.current, {
-            type: 'x,y',
-            bounds: window,
-            onDragStart() {
-                animateStartDrag?.play();
-            },
-            onDrag() {
-                const clampCol = gsap.utils.clamp(0, columns - 1); // ensure within column bounds
-                const clampRow = gsap.utils.clamp(0, rows - 1); // ensure within row bounds
-
-                const col = clampCol(Math.round(this.x / cardPosition.width));
-                const row = clampRow(Math.round(this.y / cardPosition.height));
-                const newIndex = columns * row + col;
-
-                if (newIndex !== index && cardInstances) {
-                    handleChangeIndex(cardInstances, index, newIndex);
-                }
-            },
-            onRelease() {
-                animateStartDrag?.reverse();
-                animateToPosition(cardContainerRef.current!, cardPosition);
-            },
-        });
-    }, []);
 
     return (
         <div
-            ref={cardContainerRef}
-            className='card absolute cursor-move p-2 opacity-0'
+            className='card-container absolute cursor-move p-2 opacity-0'
             role='gridcell'
         >
             <div
