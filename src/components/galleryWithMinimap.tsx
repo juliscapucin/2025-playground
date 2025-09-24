@@ -7,7 +7,7 @@ import { useGSAP } from '@gsap/react';
 import ScrollTrigger from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-import { ButtonClose } from '@/components/buttons';
+import { Button, ButtonClose } from '@/components/buttons';
 import { Heading, ImageWithSpinner } from '@/components/ui';
 import { Image } from '@/types';
 
@@ -90,21 +90,36 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
     return (
         <div className='relative mt-40 flex w-full flex-row items-start justify-between'>
             {/* MAIN GALLERY */}
-            <div className='flex-1 pr-8' ref={mainGalleryRef}>
+            <div className='flex-1 md:pr-8'>
                 <Heading tag='h2' variant='headline' classes='h-24'>
                     Gallery Minimap
                 </Heading>
-                <div className='flex flex-col gap-8'>
+
+                {/* BUTTON CLOSE */}
+                {isFullscreenOpen && (
+                    <ButtonClose classes='z-150' onClick={closeFullscreen} />
+                )}
+                <div
+                    ref={mainGalleryRef}
+                    className={`flex flex-col gap-8 ${isFullscreenOpen ? 'fixed inset-0 z-50 overflow-y-scroll bg-primary p-8' : ''}`}
+                >
                     {images && images.length > 0 ? (
                         images.map((image, index) => (
-                            <ImageWithSpinner
+                            <Button
                                 key={`gallery-image-${index}`}
                                 id={`image-${index}`}
-                                className={`w-full object-contain`}
-                                image={image}
-                                sizes='10vw'
-                                quality={70}
-                            />
+                                onClick={(e) =>
+                                    openFullscreen(e, `image-${index}`)
+                                }
+                                classes='w-full overflow-clip rounded-4xl'
+                            >
+                                <ImageWithSpinner
+                                    className={`w-full object-contain`}
+                                    image={image}
+                                    sizes='100vw'
+                                    quality={70}
+                                />
+                            </Button>
                         ))
                     ) : (
                         <p>No images available</p>
@@ -119,19 +134,19 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                         {/* MINIMAP MARKER */}
                         <div
                             ref={minimapMarkerRef}
-                            className='absolute z-150 w-full border border-secondary'
+                            className='absolute z-150 w-full rounded-2xl border border-secondary'
                         ></div>
                         {/* THUMBNAILS */}
                         <div
                             ref={minimapRef}
-                            className='pointer-events-auto relative mx-4 space-y-4'
+                            className='relative mx-4 space-y-4'
                         >
                             {images.map((image, index) => (
-                                <button
+                                <Button
                                     onClick={() =>
                                         animateScrollTo(`image-${index}`)
                                     }
-                                    className={`relative w-full`}
+                                    classes={`relative w-full overflow-clip rounded-xl hover:scale-90`}
                                     key={`project-thumbnail-${index}`}
                                 >
                                     <ImageWithSpinner
@@ -140,29 +155,12 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                                         sizes='10vw'
                                         quality={70}
                                     />
-                                </button>
+                                </Button>
                             ))}
                         </div>
                     </>
                 )}
             </aside>
-
-            {/* FULL SCREEN GALLERY */}
-            <div className='fixed inset-0 z-100 hidden translate-y-full transform overflow-y-scroll md:block'>
-                {images && images.length > 0 ? (
-                    images.map((image, index) => (
-                        <ImageWithSpinner
-                            key={`full-screen-image-${index}`}
-                            className={`w-full object-contain`}
-                            image={image}
-                            sizes='100vw'
-                            quality={70}
-                        />
-                    ))
-                ) : (
-                    <p>No images available</p>
-                )}
-            </div>
         </div>
     );
 }

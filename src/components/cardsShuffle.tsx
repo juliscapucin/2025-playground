@@ -11,12 +11,15 @@ gsap.registerPlugin(ScrollTrigger, Draggable, InertiaPlugin);
 
 import { animateSplitText } from '@/lib/animations';
 import { Heading } from '@/components/ui';
+import { useGSAP } from '@gsap/react';
+
+import { images } from '@/data';
 
 const cardsData = [
-    { title: 'Card 1', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 2', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 3', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
-    { title: 'Card 4', src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg' },
+    { title: 'Card 1', src: images[0].src },
+    { title: 'Card 2', src: images[1].src },
+    { title: 'Card 3', src: images[2].src },
+    { title: 'Card 4', src: images[3].src },
 ];
 
 const cardsShuffleAnimation = (cards: HTMLElement[]) => {
@@ -80,41 +83,38 @@ export default function Carousel() {
     const containerRef = useRef<HTMLDivElement>(null);
     const itemsRef = useRef<HTMLDivElement>(null);
 
-    useLayoutEffect(() => {
+    useGSAP(() => {
         const container = containerRef.current;
         const items = itemsRef.current;
         const cards = gsap.utils.toArray('.card', items) as HTMLElement[];
 
         if (!container || !cards) return;
 
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                // ScrollTrigger
-                scrollTrigger: {
-                    trigger: container,
-                    start: 'top 10%',
-                    end: '+=400%',
-                    scrub: 1,
-                    pin: true,
-                    markers: true,
-                },
-            });
+        const tl = gsap.timeline({
+            // ScrollTrigger
+            scrollTrigger: {
+                trigger: container,
+                start: 'top 10%',
+                end: '+=400%',
+                scrub: 1,
+                pin: true,
+                // markers: true,
+            },
+        });
 
-            tl.add(
-                // Text Animation
-                animateSplitText(
-                    "[data-gsap='cards-shuffle-heading']",
-                    'chars',
-                    1,
-                    0.03
-                )
+        tl.add(
+            // Text Animation
+            animateSplitText(
+                "[data-gsap='cards-shuffle-heading']",
+                'chars',
+                1,
+                0.03
             )
-                // Shuffle cards
-                .add(cardsShuffleAnimation(cards), '<')
-                // Expand cards
-                .add(cardsExpansionAnimation(cards));
-        }, container);
-        return () => ctx.revert();
+        )
+            // Shuffle cards
+            .add(cardsShuffleAnimation(cards), '<')
+            // Expand cards
+            .add(cardsExpansionAnimation(cards));
     }, []);
 
     return (

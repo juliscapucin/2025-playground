@@ -58,6 +58,28 @@
         padding: 0;
     }
 
+    * {
+        scrollbar-width: thin;
+        scrollbar-color: var(--primary) var(--secondary);
+    }
+
+    /* Chrome, Edge, and Safari */
+    *::-webkit-scrollbar {
+        width: 12px;
+    }
+
+    *::-webkit-scrollbar-track {
+        background: var(--primary);
+    }
+
+    *::-webkit-scrollbar-thumb {
+        background-color: var(--secondary);
+    }
+
+    button {
+        @apply cursor-pointer;
+    }
+
     h1 {
         font-family: var(--font-acma);
     }

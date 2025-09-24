@@ -64,7 +64,7 @@ export default function ImageWithSpinner({
                     quality={quality}
                     width={width}
                     height={height}
-                    onLoadingComplete={() => setIsLoading(false)}
+                    onLoad={() => setIsLoading(false)}
                     onError={() => {
                         setHasError(true);
                         setIsLoading(false);

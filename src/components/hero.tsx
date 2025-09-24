@@ -11,6 +11,7 @@ gsap.registerPlugin(GSDevTools);
 
 import { Heading, Subtitle } from '@/components/ui';
 import { animateSplitText } from '@/lib/animations';
+import { useGSAP } from '@gsap/react';
 
 function animatedProgressBar() {
     const tl = gsap.timeline();
@@ -78,60 +79,53 @@ function animateMask() {
 export default function Hero() {
     const outerContainerRef = useRef<HTMLDivElement>(null);
 
-    useLayoutEffect(() => {
+    useGSAP(() => {
         if (!outerContainerRef.current) return;
 
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline();
-            tl.add(animatedProgressBar())
-                .add(
-                    animateSplitText(
-                        "[data-gsap='preloader-text']",
-                        'chars',
-                        0.6,
-                        0.05
-                    )
+        const tl = gsap.timeline();
+        tl.add(animatedProgressBar())
+            .add(
+                animateSplitText(
+                    "[data-gsap='preloader-text']",
+                    'chars',
+                    0.6,
+                    0.05
                 )
-                .add(animateMask(), 'mask') // label for mask start
-                // Fade out progress bar container
-                .to(
-                    "[data-gsap='preloader-progress-bar-container']",
-                    {
-                        opacity: 0,
-                        duration: 0.3,
-                    },
-                    'mask' // start at the same time as animateMask
-                )
-                .add(
-                    animateSplitText(
-                        "[data-gsap='welcome-text']",
-                        'chars',
-                        0.8,
-                        0.05
-                    ),
-                    'mask'
-                )
-                .add(animateSplitText("[data-gsap='links']", 'lines'), '<0.6')
-                .add(
-                    animateSplitText(
-                        "[data-gsap='hero-footer-heading']",
-                        'lines'
-                    ),
-                    '<0.2'
-                )
-                .add(
-                    animateSplitText(
-                        "[data-gsap='hero-footer-paragraph']",
-                        'lines'
-                    ),
-                    '<0.1'
-                );
+            )
+            .add(animateMask(), 'mask') // label for mask start
+            // Fade out progress bar container
+            .to(
+                "[data-gsap='preloader-progress-bar-container']",
+                {
+                    opacity: 0,
+                    duration: 0.3,
+                },
+                'mask' // start at the same time as animateMask
+            )
+            .add(
+                animateSplitText(
+                    "[data-gsap='welcome-text']",
+                    'chars',
+                    0.8,
+                    0.05
+                ),
+                'mask'
+            )
+            .add(animateSplitText("[data-gsap='links']", 'lines'), '<0.6')
+            .add(
+                animateSplitText("[data-gsap='hero-footer-heading']", 'lines'),
+                '<0.2'
+            )
+            .add(
+                animateSplitText(
+                    "[data-gsap='hero-footer-paragraph']",
+                    'lines'
+                ),
+                '<0.1'
+            );
 
-            // Uncomment below to enable GSDevTools for this timeline
-            // GSDevTools.create({ animation: tl });
-        }, outerContainerRef);
-
-        return () => ctx.revert();
+        // Uncomment below to enable GSDevTools for this timeline
+        // GSDevTools.create({ animation: tl });
     }, []);
     return (
         <div className='pointer-events-none relative flex h-svh w-full flex-col items-stretch justify-stretch'>
