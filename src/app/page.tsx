@@ -97,7 +97,7 @@ export default function Home() {
             <CardsShuffle />
             <Accordion />
             <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} />
-            <GalleryWithMinimap images={images} artistName='Artist Name' />
+            <GalleryWithMinimap images={images} />
             <Table />
             <HeadingWithParagraph
                 title='Section Title'
