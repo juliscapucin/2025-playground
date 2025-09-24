@@ -55,7 +55,7 @@ export default function MouseFollower({
     return (
         <div
             ref={cursorRef}
-            className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border ${variant === 'big' ? 'h-40 w-40 border-secondary bg-primary/30' : 'h-24 w-24 border-secondary bg-primary/30'}`}
+            className={`pointer-events-none fixed top-0 left-0 z-15 flex items-center justify-center rounded-full border border-secondary/50 bg-primary/30 ${variant === 'big' ? 'h-40 w-40' : 'h-24 w-24'}`}
         >
             {children ? (
                 children

@@ -7,11 +7,13 @@ type ButtonCloseProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 export default function ButtonClose({ classes, ...props }: ButtonCloseProps) {
     return (
         <button
-            className={`relative h-12 w-12 ${classes || ''}`}
+            className={`group relative h-12 w-12 ${classes || ''}`}
             aria-label='close menu'
             {...props}
         >
-            <IconClose />
+            <div className='transform-rotate duration-300 group-hover:rotate-90'>
+                <IconClose />
+            </div>
         </button>
     );
 }

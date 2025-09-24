@@ -102,7 +102,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
 
             {/* BUTTON CLOSE FULLSCREEN */}
             {isFullscreenOpen && (
-                <div className='fixed top-14 right-16 z-150 flex aspect-square w-16 items-center justify-center rounded-full border border-secondary'>
+                <div className='fixed top-14 right-16 z-150 flex aspect-square w-16 items-center justify-center rounded-full border border-secondary/50'>
                     <ButtonClose onClick={closeFullscreen} />
                 </div>
             )}
@@ -150,7 +150,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                         {/* MINIMAP MARKER */}
                         <div
                             ref={minimapMarkerRef}
-                            className='absolute z-150 w-full rounded-2xl border border-secondary'
+                            className='absolute z-150 w-full rounded-2xl border border-secondary/50'
                         ></div>
                         {/* THUMBNAILS */}
                         <div
