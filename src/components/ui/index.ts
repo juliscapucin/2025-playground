@@ -1,5 +1,6 @@
 import CustomButton from './customButton';
 import CustomLink from './customLink';
+import Footer from './footer';
 import Grid from './grid';
 import Header from './header';
 import Heading from './heading';
@@ -17,6 +18,7 @@ import TitleHeadline from './titleHeadline';
 export {
     CustomButton,
     CustomLink,
+    Footer,
     Grid,
     Header,
     Heading,

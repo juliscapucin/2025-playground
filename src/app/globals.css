@@ -33,7 +33,7 @@
     --text-label-medium: 12px;
     --text-label-small: 10px;
 
-    --max-width: 1400px;
+    --max-width: 1800px;
 
     /* Heights based on Tailwind's spacing scale: --spacing: 0.25rem /* 4px */
     --header-height: calc(var(--spacing) * 16) /* [16] 4rem = 64px */;

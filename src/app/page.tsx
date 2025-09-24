@@ -13,7 +13,7 @@ import { cards, faqItems, images } from '@/data';
 
 export default function Home() {
     return (
-        <main>
+        <main className='w-full bg-primary'>
             <Hero />
             <Table />
             <ExpandableCards />

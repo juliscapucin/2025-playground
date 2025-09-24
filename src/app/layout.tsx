@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import { Geist, Geist_Mono, Noto_Sans } from 'next/font/google';
 import './globals.css';
 
-import { Header } from '@/components/ui';
+import { Footer, Header } from '@/components/ui';
 
 import { navLinks } from '@/data';
 
@@ -46,10 +46,11 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mx-auto mb-32 w-full max-w-[1800px] overflow-x-clip bg-primary px-4 font-secondary font-light text-secondary antialiased md:px-8`}
+                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mx-auto mb-32 w-full max-w-[var(--max-width)] overflow-x-clip bg-primary px-4 font-secondary font-light text-secondary antialiased md:px-8`}
             >
                 <Header navLinks={navLinks} />
                 {children}
+                <Footer navlinks={navLinks} />
             </body>
         </html>
     );
