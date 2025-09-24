@@ -4,7 +4,7 @@ import { useState } from 'react';
 import Image from 'next/image';
 import { Image as ImageType } from '@/types';
 
-type ImageWithSpinnerProps = {
+type ImageWithSpinnerProps = React.HTMLAttributes<HTMLDivElement> & {
     className?: string;
     wrapperClassName?: string;
     spinnerClassName?: string;
@@ -26,14 +26,18 @@ export default function ImageWithSpinner({
     showSpinner = true,
     altFallback = '',
     image,
+    ...props
 }: ImageWithSpinnerProps) {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
     const { alt, width, height, src } = image;
+    const { id } = props;
 
     return (
         <div
             className={`relative ${wrapperClassName}`}
+            id={id}
+            role='img'
             aria-busy={isLoading}
             aria-live='polite'
         >

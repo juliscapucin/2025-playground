@@ -26,7 +26,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
 
     function openFullscreen(
         e: React.MouseEvent<HTMLButtonElement>,
-        index: number
+        index: string
     ) {
         setIsFullscreenOpen(true);
         setTimeout(() => {
@@ -99,6 +99,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                         images.map((image, index) => (
                             <ImageWithSpinner
                                 key={`gallery-image-${index}`}
+                                id={`image-${index}`}
                                 className={`w-full object-contain`}
                                 image={image}
                                 sizes='10vw'
@@ -112,7 +113,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
             </div>
 
             {/* MINIMAP */}
-            <aside className='sticky top-[var(--header-height)] z-150 mt-24 hidden w-[var(--minimap-width)] pt-8 md:block'>
+            <aside className='sticky top-[var(--header-height)] z-10 mt-24 hidden w-[var(--minimap-width)] pt-8 md:block'>
                 {images && images.length > 1 && (
                     <>
                         {/* MINIMAP MARKER */}
@@ -127,7 +128,9 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                         >
                             {images.map((image, index) => (
                                 <button
-                                    onClick={() => animateScrollTo(index)}
+                                    onClick={() =>
+                                        animateScrollTo(`image-${index}`)
+                                    }
                                     className={`relative w-full`}
                                     key={`project-thumbnail-${index}`}
                                 >

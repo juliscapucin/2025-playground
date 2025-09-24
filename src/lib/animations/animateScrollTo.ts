@@ -2,19 +2,14 @@ import gsap from 'gsap';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
 
 export const animateScrollTo = (
-    targetIndex: number,
+    targetElement: string,
     container?: HTMLElement | null
 ) => {
-    const targetPanel = document.querySelector(
-        `[data-id=image-${targetIndex}]`
-    ) as HTMLDivElement;
-    let y = targetPanel?.offsetTop + 200 || 0;
-
     gsap.registerPlugin(ScrollToPlugin);
 
     gsap.to(container ? container : window, {
         scrollTo: {
-            y: y,
+            y: `#${targetElement}`,
             autoKill: false,
         },
     });
