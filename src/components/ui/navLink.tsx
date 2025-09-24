@@ -8,14 +8,14 @@ type NavLinkProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 export default function NavLink({ label, ...props }: NavLinkProps) {
     return (
-        <div className='max-h-8 overflow-clip'>
+        <li className='max-h-8 overflow-clip'>
             <CustomButton
-                classes='text-title-small md:text-title-medium uppercase'
+                classes='text-title-small md:text-title-medium'
                 disabled={false}
                 {...props}
             >
                 {label}
             </CustomButton>
-        </div>
+        </li>
     );
 }

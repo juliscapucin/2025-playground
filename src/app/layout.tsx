@@ -46,10 +46,14 @@ export default function RootLayout({
     return (
         <html lang='en'>
             <body
-                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mx-auto mb-32 w-full max-w-[var(--max-width)] overflow-x-clip bg-primary px-4 font-secondary font-light text-secondary antialiased md:px-8`}
+                className={`${font.variable} ${geistSans.variable} ${noto.variable} ${geistMono.variable} relative mb-32 w-full overflow-x-clip bg-primary font-secondary font-light text-secondary antialiased`}
             >
-                <Header navLinks={navLinks} />
-                {children}
+                <div className='w-full bg-primary'>
+                    <div className='mx-auto max-w-[var(--max-width)]'>
+                        <Header navLinks={navLinks} />
+                        {children}
+                    </div>
+                </div>
                 <Footer navlinks={navLinks} />
             </body>
         </html>

@@ -21,7 +21,7 @@ export default function Header({ navLinks }: HeaderProps) {
                 <Button onClick={() => router.push('/')}>Home</Button>
 
                 {/* NAVLINKS */}
-                <div className='gap-8 lg:flex'>
+                <ul className='gap-8 lg:flex'>
                     {navLinks.map(
                         (link, index) =>
                             link.slug !== '/' && (
@@ -32,7 +32,7 @@ export default function Header({ navLinks }: HeaderProps) {
                                 />
                             )
                     )}
-                </div>
+                </ul>
             </nav>
         </header>
     );

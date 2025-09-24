@@ -5,6 +5,13 @@ export const navLinks = [
     { label: 'Contact', slug: '/contact' },
 ];
 
+export const socialLinks = [
+    { label: 'Facebook', url: 'https://facebook.com' },
+    { label: 'Twitter', url: 'https://twitter.com' },
+    { label: 'Instagram', url: 'https://instagram.com' },
+    { label: 'LinkedIn', url: 'https://linkedin.com' },
+];
+
 export const cards = [
     {
         id: '1',
