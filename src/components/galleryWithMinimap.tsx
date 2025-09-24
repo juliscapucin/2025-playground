@@ -12,6 +12,8 @@ import { Heading, ImageWithSpinner } from '@/components/ui';
 import { Image } from '@/types';
 
 import { animateScrollTo } from '@/lib/animations';
+import MouseFollower from './mouseFollower';
+import { IconChevron } from './icons';
 
 type MinimapProps = {
     images?: Image[];
@@ -19,6 +21,7 @@ type MinimapProps = {
 
 export default function GalleryWithMinimap({ images }: MinimapProps) {
     const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
+    const [isImageHovered, setIsImageHovered] = useState(false);
 
     const minimapMarkerRef = useRef<HTMLDivElement>(null);
     const minimapRef = useRef<HTMLDivElement>(null);
@@ -89,6 +92,14 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
 
     return (
         <div className='relative mt-40 flex w-full flex-row items-start justify-between'>
+            {/* MOUSE FOLLOWER */}
+            <MouseFollower variant='small' isVisible={isImageHovered}>
+                <div className='flex -rotate-45 items-center gap-4'>
+                    <IconChevron direction='back' />
+                    <IconChevron direction='forward' />
+                </div>
+            </MouseFollower>
+
             {/* MAIN GALLERY */}
             <div className='flex-1 md:pr-8'>
                 <Heading tag='h2' variant='headline' classes='h-24'>
@@ -111,6 +122,8 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                                 onClick={(e) =>
                                     openFullscreen(e, `image-${index}`)
                                 }
+                                onMouseEnter={() => setIsImageHovered(true)}
+                                onMouseLeave={() => setIsImageHovered(false)}
                                 classes='w-full overflow-clip rounded-4xl'
                             >
                                 <ImageWithSpinner

@@ -4,6 +4,7 @@ import DragAndDropGrid from './dragAndDropGrid';
 import ExpandableCards from './expandableCards';
 import GalleryWithMinimap from './galleryWithMinimap';
 import Hero from './hero';
+import MouseFollower from './mouseFollower';
 import Table from './table';
 
 export {
@@ -13,5 +14,6 @@ export {
     ExpandableCards,
     GalleryWithMinimap,
     Hero,
+    MouseFollower,
     Table,
 };
