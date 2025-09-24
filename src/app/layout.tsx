@@ -5,12 +5,7 @@ import './globals.css';
 
 import { Header } from '@/components/ui';
 
-const navLinks = [
-    { label: 'Home', slug: '/' },
-    { label: 'About', slug: '/about' },
-    { label: 'Program', slug: '/program' },
-    { label: 'Contact', slug: '/contact' },
-];
+import { navLinks } from '@/data';
 
 const noto = Noto_Sans({
     variable: '--font-noto',

@@ -1,27 +1,16 @@
-import {
-    ExpandableCards,
-    Accordion,
-    CardsShuffle,
-    Table,
-    Hero,
-    DragAndDropGrid,
-    GalleryWithMinimap,
-} from '@/components';
 import { HeadingWithParagraph } from '@/components/ui';
+import { DefaultPage } from '@/components/pages';
 
-import { cards, faqItems, images } from '@/data';
+import { faqItems } from '@/data';
 
-export default function Home() {
+type ContactPageProps = {
+    ctaTitle: string;
+    ctaDescription: string;
+};
+
+export default function ContactPage() {
     return (
-        <main>
-            <Hero />
-            <Table />
-            <ExpandableCards />
-            <CardsShuffle />
-            <Accordion items={faqItems} />
-            <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} />
-            <GalleryWithMinimap images={images} />
-            <Table />
+        <DefaultPage title='Contact'>
             <HeadingWithParagraph
                 title='Section Title'
                 paragraphs={[
@@ -29,6 +18,6 @@ export default function Home() {
                     'Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas. Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas.',
                 ]}
             />
-        </main>
+        </DefaultPage>
     );
 }

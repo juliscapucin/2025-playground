@@ -1,8 +1,9 @@
 'use client';
 
-import { usePathname } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 
-import { CustomButton, MenuMobile, NavLink } from '@/components/ui';
+import { Button } from '@/components/buttons';
+import { MenuMobile, NavLink } from '@/components/ui';
 import { NavLink as NavLinkType } from '@/types';
 
 type HeaderProps = {
@@ -10,22 +11,14 @@ type HeaderProps = {
 };
 
 export default function Header({ navLinks }: HeaderProps) {
-    const pathname = usePathname();
+    const router = useRouter();
 
     return (
         <header className='pointer-events-none fixed top-0 right-0 left-0 z-50'>
             <MenuMobile navLinks={navLinks} />
             <nav className='h-16 justify-between overflow-clip bg-primary px-8 py-4 md:hidden lg:flex'>
                 {/* LOGO */}
-                <CustomButton
-                    slug='/'
-                    classes={`underlined-link text-title-small md:text-title-medium uppercase transition-transform ${pathname === '/' ? '-translate-x-[150%]' : 'translate-x-0'}`}
-                    transitionOnClick={() =>
-                        console.log('add page transition animation')
-                    }
-                >
-                    MAN/ONE MUSIC
-                </CustomButton>
+                <Button onClick={() => router.push('/')}>Home</Button>
 
                 {/* NAVLINKS */}
                 <div className='gap-8 lg:flex'>
@@ -34,9 +27,8 @@ export default function Header({ navLinks }: HeaderProps) {
                             link.slug !== '/' && (
                                 <NavLink
                                     label={link.label}
-                                    slug={link.slug}
                                     key={`panel-button-${index}`}
-                                    action={() => console.log('action')}
+                                    onClick={() => router.push(link.slug)}
                                 />
                             )
                     )}
