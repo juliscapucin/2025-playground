@@ -34,6 +34,13 @@
     --text-label-small: 10px;
 
     --max-width: 1400px;
+
+    /* Heights based on Tailwind's spacing scale: --spacing: 0.25rem /* 4px */
+    --header-height: calc(var(--spacing) * 16) /* [16] 4rem = 64px */;
+    --footer-height: calc(var(--spacing) * 64) /* [64] 16rem = 256px */;
+
+    /* Minimap dimensions */
+    --minimap-width: 180px;
 }
 
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));

@@ -29,7 +29,7 @@ export default function ImageWithSpinner({
 }: ImageWithSpinnerProps) {
     const [isLoading, setIsLoading] = useState(true);
     const [hasError, setHasError] = useState(false);
-    const { alt, width, height, url } = image;
+    const { alt, width, height, src } = image;
 
     return (
         <div
@@ -54,7 +54,7 @@ export default function ImageWithSpinner({
             {!hasError ? (
                 <Image
                     className={className}
-                    src={url}
+                    src={src}
                     alt={alt || altFallback}
                     sizes={sizes}
                     quality={quality}

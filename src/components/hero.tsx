@@ -127,6 +127,7 @@ export default function Hero() {
                     '<0.1'
                 );
 
+            // Uncomment below to enable GSDevTools for this timeline
             // GSDevTools.create({ animation: tl });
         }, outerContainerRef);
 

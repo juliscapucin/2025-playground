@@ -5,6 +5,7 @@ import {
     Table,
     Hero,
     DragAndDropGrid,
+    GalleryWithMinimap,
 } from '@/components';
 
 const cards = [
@@ -48,6 +49,44 @@ const cards = [
     },
 ];
 
+const images = [
+    {
+        id: '1',
+        src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg',
+        width: 300,
+        height: 200,
+        alt: 'Image 1',
+    },
+    {
+        id: '2',
+        src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg',
+        width: 300,
+        height: 200,
+        alt: 'Image 2',
+    },
+    {
+        id: '3',
+        src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg',
+        width: 300,
+        height: 200,
+        alt: 'Image 3',
+    },
+    {
+        id: '4',
+        src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg',
+        width: 300,
+        height: 200,
+        alt: 'Image 4',
+    },
+    {
+        id: '5',
+        src: '/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg',
+        width: 300,
+        height: 200,
+        alt: 'Image 5',
+    },
+];
+
 export default function Home() {
     return (
         <>
@@ -57,6 +96,8 @@ export default function Home() {
             <CardsShuffle />
             <Accordion />
             <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} />
+            <GalleryWithMinimap images={images} artistName='Artist Name' />
+            <Table />
         </>
     );
 }
