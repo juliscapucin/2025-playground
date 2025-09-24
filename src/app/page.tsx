@@ -7,6 +7,7 @@ import {
     DragAndDropGrid,
     GalleryWithMinimap,
 } from '@/components';
+import { HeadingWithParagraph, ParagraphFeature } from '@/components/ui';
 
 const cards = [
     {
@@ -98,6 +99,13 @@ export default function Home() {
             <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} />
             <GalleryWithMinimap images={images} artistName='Artist Name' />
             <Table />
+            <HeadingWithParagraph
+                title='Section Title'
+                paragraphs={[
+                    'Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas.',
+                    'Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas. Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas.',
+                ]}
+            />
         </>
     );
 }
