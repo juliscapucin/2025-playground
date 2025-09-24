@@ -62,13 +62,13 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                 start: 'top top',
                 end: 'bottom bottom',
                 scrub: 0.5,
+                // markers: true,
             },
         });
 
         tl.to(thumbnails, {
             y: (thumbnailsHeight - markerHeight) * -1,
-            duration: 1,
-            ease: 'linear',
+            ease: 'none',
         });
     }, []);
 
