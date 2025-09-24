@@ -94,11 +94,18 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
         <div className='relative mt-40 flex w-full flex-row items-start justify-between'>
             {/* MOUSE FOLLOWER */}
             <MouseFollower variant='small' isVisible={isImageHovered}>
-                <div className='flex -rotate-45 items-center gap-4'>
+                <div className='flex -rotate-45 items-center gap-2'>
                     <IconChevron direction='back' />
                     <IconChevron direction='forward' />
                 </div>
             </MouseFollower>
+
+            {/* BUTTON CLOSE FULLSCREEN */}
+            {isFullscreenOpen && (
+                <div className='fixed top-14 right-16 z-150 flex aspect-square w-16 items-center justify-center rounded-full border border-secondary'>
+                    <ButtonClose onClick={closeFullscreen} />
+                </div>
+            )}
 
             {/* MAIN GALLERY */}
             <div className='flex-1 md:pr-8'>
@@ -106,10 +113,6 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                     Gallery Minimap
                 </Heading>
 
-                {/* BUTTON CLOSE */}
-                {isFullscreenOpen && (
-                    <ButtonClose classes='z-150' onClick={closeFullscreen} />
-                )}
                 <div
                     ref={mainGalleryRef}
                     className={`flex flex-col gap-8 ${isFullscreenOpen ? 'fixed inset-0 z-50 overflow-y-scroll bg-primary p-8' : ''}`}
@@ -124,7 +127,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                                 }
                                 onMouseEnter={() => setIsImageHovered(true)}
                                 onMouseLeave={() => setIsImageHovered(false)}
-                                classes='w-full overflow-clip rounded-4xl'
+                                classes={`w-full overflow-clip rounded-4xl ${isFullscreenOpen ? 'pointer-events-none' : ''}`}
                             >
                                 <ImageWithSpinner
                                     className={`w-full object-contain`}
