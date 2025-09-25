@@ -11,6 +11,7 @@ import MenuMobile from './menuMobile';
 import NavLink from './navLink';
 import PageWrapper from './pageWrapper';
 import ParagraphFeature from './paragraphFeature';
+import Spacer from './spacer';
 import Subtitle from './subtitle';
 import TitleDisplay from './titleDisplay';
 import TitleHeadline from './titleHeadline';
@@ -29,6 +30,7 @@ export {
     NavLink,
     PageWrapper,
     ParagraphFeature,
+    Spacer,
     Subtitle,
     TitleDisplay,
     TitleHeadline,

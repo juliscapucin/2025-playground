@@ -121,7 +121,7 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-[95svh] w-full'
+            className='relative mx-auto my-64 h-[calc(100vh-var(--header-height))] w-full'
         >
             <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center'>
                 <Heading

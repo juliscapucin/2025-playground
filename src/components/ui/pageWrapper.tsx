@@ -1,5 +1,3 @@
-import { Heading } from '@/components/ui';
-
 type PageWrapperProps = {
     children?: React.ReactNode;
 };

@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 import { useGSAP } from '@gsap/react';
@@ -20,39 +20,61 @@ export default function Footer({ navlinks }: FooterProps) {
     const router = useRouter();
     const pathname = usePathname();
 
+    const footerContainerRef = useRef<HTMLElement>(null);
     const footerContentRef = useRef<HTMLDivElement>(null);
     const footerMaskRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        if (!pathname || !footerContentRef.current || !footerMaskRef.current)
+        if (
+            !pathname ||
+            !footerContainerRef.current ||
+            !footerContentRef.current ||
+            !footerMaskRef.current
+        )
             return;
 
         ScrollTrigger.getById('footer')?.kill();
         gsap.killTweensOf(footerMaskRef.current);
 
-        const tl = gsap.timeline({
-            scrollTrigger: {
-                id: 'footer',
-                trigger: footerContentRef.current,
-                start: 'top bottom',
-                end: 'bottom bottom',
-                scrub: 0.2,
-                //  markers: true,
-            },
-        });
+        setTimeout(() => {
+            const tl = gsap.timeline({
+                scrollTrigger: {
+                    id: 'footer',
+                    trigger: footerContainerRef.current,
+                    start: 'top bottom',
+                    end: 'bottom bottom',
+                    scrub: 0.2,
+                    anticipatePin: 1,
+                    // markers: true,
+                },
+            });
 
-        tl.fromTo(
-            footerMaskRef.current,
-            { scaleY: 1, transformOrigin: 'top' },
-            {
-                scaleY: 0,
-                ease: 'none',
-            }
-        );
+            tl.fromTo(
+                footerMaskRef.current,
+                { scaleY: 1, transformOrigin: 'top' },
+                {
+                    scaleY: 0,
+                    ease: 'none',
+                }
+            ).fromTo(
+                footerContentRef.current,
+                { yPercent: -50 },
+                { yPercent: 0, ease: 'none' },
+                0 // start at the same time as previous tween
+            );
+        }, 500); // Delay to ensure ScrollTrigger is properly reset
+
+        return () => {
+            ScrollTrigger.getById('footer')?.kill();
+            gsap.killTweensOf(footerMaskRef.current);
+        };
     }, [pathname]);
 
     return (
-        <footer className='relative h-[700px] overflow-clip'>
+        <footer
+            ref={footerContainerRef}
+            className='relative h-[700px] overflow-clip'
+        >
             {/* MASK */}
             <div
                 ref={footerMaskRef}
