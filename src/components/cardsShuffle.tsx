@@ -97,7 +97,7 @@ export default function Carousel() {
                 trigger: container,
                 start: 'top 5%',
                 end: '+=400%',
-                scrub: 1,
+                scrub: 0,
                 pin: true,
                 // markers: true,
             },

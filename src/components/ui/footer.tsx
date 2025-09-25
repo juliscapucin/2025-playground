@@ -43,7 +43,7 @@ export default function Footer({ navlinks }: FooterProps) {
                     trigger: footerContainerRef.current,
                     start: 'top bottom',
                     end: 'bottom bottom',
-                    scrub: 0.2,
+                    scrub: 0,
                     // markers: true,
                 },
             });

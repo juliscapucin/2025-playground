@@ -23,6 +23,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
     const [isFullscreenOpen, setIsFullscreenOpen] = useState(false);
     const [isImageHovered, setIsImageHovered] = useState(false);
 
+    const minimapContainerRef = useRef<HTMLElement>(null);
     const minimapMarkerRef = useRef<HTMLDivElement>(null);
     const minimapRef = useRef<HTMLDivElement>(null);
     const mainGalleryRef = useRef<HTMLDivElement>(null);
@@ -65,7 +66,8 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                 id: 'minimap',
                 start: 'top top',
                 end: 'bottom bottom',
-                scrub: 0.5,
+                scrub: 0,
+                pin: minimapContainerRef.current,
                 // markers: true,
             },
         });
@@ -145,7 +147,10 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
             </div>
 
             {/* MINIMAP */}
-            <aside className='sticky top-[var(--header-height)] z-10 mt-24 hidden w-[var(--minimap-width)] pt-8 md:block'>
+            <aside
+                ref={minimapContainerRef}
+                className='sticky top-[var(--header-height)] z-10 mt-24 hidden w-[var(--minimap-width)] pt-8 md:block'
+            >
                 {images && images.length > 1 && (
                     <>
                         {/* MINIMAP MARKER */}
