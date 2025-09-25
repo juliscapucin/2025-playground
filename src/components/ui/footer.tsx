@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useRef } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
 
 import { useGSAP } from '@gsap/react';
 import gsap from 'gsap';
@@ -18,53 +18,52 @@ type FooterProps = {
 
 export default function Footer({ navlinks }: FooterProps) {
     const router = useRouter();
-    const footerRef = useRef<HTMLElement>(null);
+    const pathname = usePathname();
+
     const footerContentRef = useRef<HTMLDivElement>(null);
     const footerMaskRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
-        if (!footerRef.current || !footerContentRef.current) return;
+        if (!pathname || !footerContentRef.current || !footerMaskRef.current)
+            return;
+
+        ScrollTrigger.getById('footer')?.kill();
+        gsap.killTweensOf(footerMaskRef.current);
 
         const tl = gsap.timeline({
             scrollTrigger: {
-                trigger: footerRef.current,
+                id: 'footer',
+                trigger: footerContentRef.current,
                 start: 'top bottom',
                 end: 'bottom bottom',
                 scrub: 0.2,
+                //  markers: true,
             },
         });
 
         tl.fromTo(
-            footerContentRef.current,
-            { yPercent: 30 },
+            footerMaskRef.current,
+            { yPercent: 0 },
             {
-                yPercent: 0,
+                yPercent: -100,
+                transformOrigin: 'top',
                 ease: 'none',
             }
-        ).fromTo(
-            footerMaskRef.current,
-            { scaleY: 1 },
-            {
-                scaleY: 0,
-                transformOrigin: 'top center',
-                ease: 'none',
-            },
-            '<'
         );
-    }, []);
+    }, [pathname]);
 
     return (
-        <footer
-            ref={footerRef}
-            className='pointer-events-none relative h-[50svh] overflow-clip'
-        >
+        <footer className='relative h-[700px] overflow-clip'>
+            {/* MASK */}
             <div
                 ref={footerMaskRef}
-                className='absolute inset-0 z-50 h-full w-full bg-primary'
+                className='absolute inset-0 z-150 bg-amber-500 will-change-transform'
             ></div>
+
+            {/* CONTENT */}
             <div
                 ref={footerContentRef}
-                className='pointer-events-auto flex h-[50svh] w-full items-end justify-center bg-secondary text-primary'
+                className='h-full w-full bg-secondary text-primary'
             >
                 <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
                     <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge'>

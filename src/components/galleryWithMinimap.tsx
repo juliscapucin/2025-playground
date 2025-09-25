@@ -62,6 +62,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: mainImages,
+                id: 'minimap',
                 start: 'top top',
                 end: 'bottom bottom',
                 scrub: 0.5,

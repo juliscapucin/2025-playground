@@ -93,6 +93,7 @@ export default function Carousel() {
         const tl = gsap.timeline({
             // ScrollTrigger
             scrollTrigger: {
+                id: 'cards-shuffle',
                 trigger: container,
                 start: 'top 10%',
                 end: '+=400%',
