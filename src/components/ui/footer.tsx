@@ -44,7 +44,6 @@ export default function Footer({ navlinks }: FooterProps) {
                     start: 'top bottom',
                     end: 'bottom bottom',
                     scrub: 0.2,
-                    anticipatePin: 1,
                     // markers: true,
                 },
             });
@@ -73,12 +72,12 @@ export default function Footer({ navlinks }: FooterProps) {
     return (
         <footer
             ref={footerContainerRef}
-            className='relative h-[700px] overflow-clip'
+            className='relative block h-[700px] overflow-clip pb-8'
         >
             {/* MASK */}
             <div
                 ref={footerMaskRef}
-                className='absolute top-0 z-150 h-full w-full bg-primary'
+                className='absolute -top-2 z-150 h-full w-full bg-primary'
             ></div>
 
             {/* CONTENT */}

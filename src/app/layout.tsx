@@ -3,7 +3,7 @@ import localFont from 'next/font/local';
 import { Geist, Geist_Mono, Noto_Sans } from 'next/font/google';
 import './globals.css';
 
-import { Footer, Header } from '@/components/ui';
+import { Header } from '@/components/ui';
 
 import { navLinks } from '@/data';
 
@@ -50,7 +50,6 @@ export default function RootLayout({
             >
                 <Header navLinks={navLinks} />
                 {children}
-                <Footer navlinks={navLinks} />
             </body>
         </html>
     );
