@@ -27,6 +27,7 @@ export default function Header({ navLinks }: HeaderProps) {
                             link.slug !== '/' && (
                                 <NavLink
                                     label={link.label}
+                                    variant='secondary'
                                     key={`panel-button-${index}`}
                                     onClick={() => router.push(link.slug)}
                                 />

@@ -8,7 +8,7 @@ import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
-import { Heading, NavLink } from '@/components/ui';
+import { ExternalLink, Heading, NavLink } from '@/components/ui';
 
 import { socialLinks } from '@/data';
 
@@ -20,6 +20,7 @@ export default function Footer({ navlinks }: FooterProps) {
     const router = useRouter();
     const footerRef = useRef<HTMLElement>(null);
     const footerContentRef = useRef<HTMLDivElement>(null);
+    const footerMaskRef = useRef<HTMLDivElement>(null);
 
     useGSAP(() => {
         if (!footerRef.current || !footerContentRef.current) return;
@@ -28,7 +29,7 @@ export default function Footer({ navlinks }: FooterProps) {
             scrollTrigger: {
                 trigger: footerRef.current,
                 start: 'top bottom',
-                end: 'bottom bottom+=100',
+                end: 'bottom bottom',
                 scrub: 0.2,
             },
         });
@@ -36,15 +37,25 @@ export default function Footer({ navlinks }: FooterProps) {
         tl.fromTo(
             footerContentRef.current,
             { yPercent: 30 },
-            { yPercent: 0, ease: 'power2.out', duration: 1 }
+            {
+                yPercent: 0,
+                ease: 'none',
+            }
         );
     }, []);
 
     return (
-        <footer ref={footerRef} className='relative h-screen'>
+        <footer
+            ref={footerRef}
+            className='pointer-events-none relative h-[50svh]'
+        >
+            <div
+                ref={footerMaskRef}
+                className='absolute inset-0 h-full w-full bg-primary'
+            ></div>
             <div
                 ref={footerContentRef}
-                className='fixed inset-0 flex items-end justify-center bg-amber-400 text-primary'
+                className='pointer-events-auto fixed inset-0 -z-100 flex items-end justify-center bg-secondary text-primary'
             >
                 <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
                     <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge'>
@@ -52,49 +63,51 @@ export default function Footer({ navlinks }: FooterProps) {
                             Obsidian
                         </Heading>
 
+                        {/* NAVLINKS */}
                         {navlinks && navlinks.length > 0 && (
                             <ul>
                                 {navlinks.map((link) => (
                                     <NavLink
-                                        className=''
                                         label={link.label}
+                                        variant='primary'
                                         key={link.slug}
                                         onClick={() => router.push(link.slug)}
                                     />
                                 ))}
                             </ul>
                         )}
+
+                        {/* SOCIAL LINKS */}
                         {socialLinks && socialLinks.length > 0 && (
                             <ul className='self-center'>
                                 {socialLinks.map((link) => (
                                     <li key={link.label}>
-                                        <a
-                                            className='underlined-link text-title-small md:text-title-medium'
+                                        <ExternalLink
+                                            className='underlined-link text-title-small text-primary md:text-title-medium'
                                             href={link.url}
-                                            target='_blank'
-                                            rel='noopener noreferrer'
+                                            variant='primary'
                                         >
                                             {link.label}
-                                        </a>
+                                        </ExternalLink>
                                     </li>
                                 ))}
                             </ul>
                         )}
                     </div>
+
+                    {/* COPYRIGHT */}
                     <p>
                         © {new Date().getFullYear()} Obsidian Park. All rights
                         reserved.
                     </p>
                     <p>
                         Design & Development by{' '}
-                        <a
+                        <ExternalLink
+                            variant='primary'
                             href='https://juliscapucin.com'
-                            target='_blank'
-                            rel='noopener noreferrer'
-                            className='underlined-link'
                         >
                             Juli Scapucin
-                        </a>
+                        </ExternalLink>
                     </p>
                 </div>
             </div>

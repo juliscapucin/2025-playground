@@ -7,10 +7,7 @@ type ButtonProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
 
 const CustomButton = ({ classes, style, children, ...props }: ButtonProps) => {
     return (
-        <button
-            className={`underlined-link pointer-events-auto ${classes || ''}`}
-            {...props}
-        >
+        <button className={`pointer-events-auto ${classes || ''}`} {...props}>
             {children}
         </button>
     );
