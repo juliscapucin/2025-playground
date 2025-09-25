@@ -7,13 +7,13 @@ import {
     DragAndDropGrid,
     GalleryWithMinimap,
 } from '@/components';
-import { HeadingWithParagraph } from '@/components/ui';
+import { HeadingWithParagraph, PageWrapper } from '@/components/ui';
 
 import { cards, faqItems, images } from '@/data';
 
 export default function Home() {
     return (
-        <main className='w-full bg-primary pb-16'>
+        <PageWrapper>
             <Hero />
             <Table />
             <ExpandableCards />
@@ -29,6 +29,6 @@ export default function Home() {
                     'Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas. Aliquet nec orci mattis amet quisque ullamcorper neque, nibh sem. At arcu, sit dui mi, nibh dui, diam eget aliquam. Quisque id at vitae feugiat egestas.',
                 ]}
             />
-        </main>
+        </PageWrapper>
     );
 }

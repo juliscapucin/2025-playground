@@ -41,21 +41,30 @@ export default function Footer({ navlinks }: FooterProps) {
                 yPercent: 0,
                 ease: 'none',
             }
+        ).fromTo(
+            footerMaskRef.current,
+            { scaleY: 1 },
+            {
+                scaleY: 0,
+                transformOrigin: 'top center',
+                ease: 'none',
+            },
+            '<'
         );
     }, []);
 
     return (
         <footer
             ref={footerRef}
-            className='pointer-events-none relative h-[50svh]'
+            className='pointer-events-none relative h-[50svh] overflow-clip'
         >
             <div
                 ref={footerMaskRef}
-                className='absolute inset-0 h-full w-full bg-primary'
+                className='absolute inset-0 z-50 h-full w-full bg-primary'
             ></div>
             <div
                 ref={footerContentRef}
-                className='pointer-events-auto fixed inset-0 -z-100 flex items-end justify-center bg-secondary text-primary'
+                className='pointer-events-auto flex h-[50svh] w-full items-end justify-center bg-secondary text-primary'
             >
                 <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
                     <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge'>
