@@ -43,10 +43,9 @@ export default function Footer({ navlinks }: FooterProps) {
 
         tl.fromTo(
             footerMaskRef.current,
-            { yPercent: 0 },
+            { scaleY: 1, transformOrigin: 'top' },
             {
-                yPercent: -100,
-                transformOrigin: 'top',
+                scaleY: 0,
                 ease: 'none',
             }
         );
@@ -57,7 +56,7 @@ export default function Footer({ navlinks }: FooterProps) {
             {/* MASK */}
             <div
                 ref={footerMaskRef}
-                className='absolute inset-0 z-150 bg-amber-500 will-change-transform'
+                className='absolute top-0 z-150 h-full w-full bg-primary'
             ></div>
 
             {/* CONTENT */}

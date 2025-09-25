@@ -17,7 +17,7 @@ export default function Home() {
             <Hero />
             <Table />
             <ExpandableCards />
-            <CardsShuffle />
+            {/* <CardsShuffle /> */}
             <Accordion items={faqItems} />
             <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} />
             <GalleryWithMinimap images={images} />

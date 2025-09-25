@@ -95,7 +95,7 @@ export default function Carousel() {
             scrollTrigger: {
                 id: 'cards-shuffle',
                 trigger: container,
-                start: 'top 10%',
+                start: 'top 5%',
                 end: '+=400%',
                 scrub: 1,
                 pin: true,
@@ -121,7 +121,7 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-32 h-svh w-full lg:h-[50vw]'
+            className='relative mx-auto my-32 h-[95svh] w-full'
         >
             <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center'>
                 <Heading
@@ -146,6 +146,7 @@ export default function Carousel() {
                             src={card.src}
                             alt={`Card ${index + 1}`}
                             fill
+                            sizes='30vw'
                             style={{ objectFit: 'cover' }}
                         />
                     </div>

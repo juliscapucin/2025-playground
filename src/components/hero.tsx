@@ -128,11 +128,8 @@ export default function Hero() {
         // GSDevTools.create({ animation: tl });
     }, []);
     return (
-        <div className='pointer-events-none relative flex h-svh w-full flex-col items-stretch justify-stretch'>
-            <div
-                ref={outerContainerRef}
-                className='relative mt-16 h-full w-full'
-            >
+        <div className='pointer-events-none relative flex h-[calc(100vh-var(--header-height))] w-full flex-col items-stretch justify-stretch'>
+            <div ref={outerContainerRef} className='relative h-full w-full'>
                 {/* Preloader Progress */}
                 <div
                     data-gsap='preloader-progress-bar-container'
@@ -185,7 +182,7 @@ export default function Hero() {
                             alt='Logo'
                             fill
                             style={{ objectFit: 'cover' }}
-                            priority
+                            priority={true}
                             sizes='(max-width: 768px) 100vw'
                         />
                     </div>

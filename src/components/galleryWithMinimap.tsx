@@ -109,7 +109,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
             )}
 
             {/* MAIN GALLERY */}
-            <div className='flex-1 md:pr-8'>
+            <div className='h-fit flex-1 md:pr-8'>
                 <Heading tag='h2' variant='headline' classes='h-24'>
                     Gallery Minimap
                 </Heading>
