@@ -1,10 +1,15 @@
 @import 'tailwindcss';
 
 :root {
-    interpolate-size: allow-keywords;
+    interpolate-size: allow-keywords; /* To animate auto-height on accordion component */
 
     --primary: oklch(21.3% 0.034 184.9);
     --secondary: oklch(88.669% 0.01899 180.52);
+}
+
+[data-theme='light'] {
+    --primary: oklch(88.669% 0.01899 180.52);
+    --secondary: oklch(21.3% 0.034 184.9);
 }
 
 @theme inline {
@@ -42,9 +47,6 @@
     /* Minimap dimensions */
     --minimap-width: 180px;
 }
-
-@custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
-@custom-variant light (&:where([data-theme=light], [data-theme=light] *));
 
 @layer base {
     *,

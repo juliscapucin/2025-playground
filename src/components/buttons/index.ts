@@ -2,11 +2,12 @@ import Button from './button';
 import ButtonArrow from './buttonArrow';
 import ButtonBack from './buttonBack';
 import ButtonBurger from './buttonBurger';
+import ButtonsCarousel from './buttonsCarousel';
 import ButtonChevron from './buttonChevron';
 import ButtonClose from './buttonClose';
+import ButtonCopyEmail from './buttonCopyEmail';
 import ButtonRounded from './buttonRounded';
-import ButtonsCarousel from './buttonsCarousel';
-import CopyEmailButton from './copyEmailButton';
+import ButtonToggle from './buttonToggle';
 
 export {
     Button,
@@ -16,6 +17,7 @@ export {
     ButtonsCarousel,
     ButtonChevron,
     ButtonClose,
+    ButtonCopyEmail,
     ButtonRounded,
-    CopyEmailButton,
+    ButtonToggle,
 };
