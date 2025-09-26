@@ -4,18 +4,21 @@
     interpolate-size: allow-keywords; /* To animate auto-height on accordion component */
 
     --primary: oklch(27.177% 0.02119 153.349);
+    --primary-accent: oklch(37.807% 0.00729 153.844);
     --secondary: oklch(85.935% 0.03553 153.292);
     --accent: oklch(71.967% 0.18251 153.746);
 }
 
 [data-theme='light'] {
-    --primary: oklch(85.935% 0.03553 153.292);
+    --primary: oklch(87.669% 0.01773 153.814);
+    --primary-accent: oklch(73.444% 0.02031 152.894);
     --secondary: oklch(29.658% 0.04127 153.001);
     --accent: oklch(75.958% 0.19968 151.682);
 }
 
 @theme inline {
     --color-primary: var(--primary);
+    --color-primary-accent: var(--primary-accent);
     --color-secondary: var(--secondary);
     --color-accent: var(--accent);
 
@@ -23,7 +26,7 @@
     --font-secondary: var(--font-noto);
     --font-mono: var(--font-geist-mono);
 
-    --radius-huge: 8rem;
+    --radius-huge: 6rem;
 
     --text-display-large: 147px;
     --text-display-medium: 103px;
@@ -44,7 +47,7 @@
     --max-width: 1800px;
 
     /* Heights based on Tailwind's spacing scale: --spacing: 0.25rem /* 4px */
-    --header-height: calc(var(--spacing) * 16) /* [16] 4rem = 64px */;
+    --header-height: calc(var(--spacing) * 14) /* [14] 4rem = 56px */;
     --footer-height: 600px;
 
     /* Minimap dimensions */

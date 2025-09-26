@@ -17,7 +17,7 @@ export default function Header({ navLinks }: HeaderProps) {
     return (
         <header className='pointer-events-none fixed top-0 right-0 left-0 z-50'>
             <MenuMobile navLinks={navLinks} />
-            <nav className='pointer-events-auto mx-auto h-[var(--header-height)] w-fit max-w-[var(--max-width)] items-center justify-between gap-32 overflow-clip rounded-b-2xl bg-primary px-8 py-4 transition-[background-color] duration-800 md:hidden lg:flex'>
+            <nav className='pointer-events-auto mx-auto h-[var(--header-height)] w-fit max-w-[var(--max-width)] items-center justify-between gap-32 overflow-clip rounded-b-2xl bg-accent px-8 py-2 transition-[background-color] duration-800 md:hidden lg:flex'>
                 {/* START */}
                 <NavLink
                     label='Start'

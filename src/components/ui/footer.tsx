@@ -1,6 +1,6 @@
 'use client';
 
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { useRouter, usePathname } from 'next/navigation';
 
 import { useGSAP } from '@gsap/react';
@@ -70,75 +70,81 @@ export default function Footer({ navlinks }: FooterProps) {
     }, [pathname]);
 
     return (
-        <footer
-            ref={footerContainerRef}
-            className='relative block h-[700px] overflow-clip pb-8'
-        >
-            {/* MASK */}
-            <div
-                ref={footerMaskRef}
-                className='absolute -top-6 z-150 h-full w-full rounded-b-3xl bg-primary transition-colors will-change-transform'
-            ></div>
-
-            {/* CONTENT */}
-            <div
-                ref={footerContentRef}
-                className='h-full w-full bg-secondary text-primary transition-[background-color] duration-800'
+        <div className='relative w-full bg-primary'>
+            {/* MASK FLICKER */}
+            <div className='absolute -top-4 z-15 h-16 w-full rounded-b-3xl bg-primary transition-colors duration-700'></div>
+            <footer
+                ref={footerContainerRef}
+                className='relative block h-[700px] overflow-clip bg-primary pb-8'
             >
-                <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
-                    <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge'>
-                        <Heading tag='h3' variant='display'>
-                            Obsidian
-                        </Heading>
+                {/* MASK */}
+                <div
+                    ref={footerMaskRef}
+                    className='absolute -top-32 z-10 h-[calc(100%+8rem)] w-full rounded-b-3xl bg-primary transition-colors duration-700'
+                ></div>
 
-                        {/* NAVLINKS */}
-                        {navlinks && navlinks.length > 0 && (
-                            <ul>
-                                {navlinks.map((link) => (
-                                    <NavLink
-                                        label={link.label}
-                                        variant='primary'
-                                        key={link.slug}
-                                        onClick={() => router.push(link.slug)}
-                                    />
-                                ))}
-                            </ul>
-                        )}
+                {/* CONTENT */}
+                <div
+                    ref={footerContentRef}
+                    className='h-full w-full bg-secondary text-primary transition-[background-color] duration-800'
+                >
+                    <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
+                        <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge text-accent'>
+                            <Heading tag='h3' variant='display'>
+                                Obsidian
+                            </Heading>
 
-                        {/* SOCIAL LINKS */}
-                        {socialLinks && socialLinks.length > 0 && (
-                            <ul className='self-center'>
-                                {socialLinks.map((link) => (
-                                    <li key={link.label}>
-                                        <ExternalLink
-                                            className='underlined-link text-title-small text-primary md:text-title-medium'
-                                            href={link.url}
+                            {/* NAVLINKS */}
+                            {navlinks && navlinks.length > 0 && (
+                                <ul>
+                                    {navlinks.map((link) => (
+                                        <NavLink
+                                            label={link.label}
                                             variant='primary'
-                                        >
-                                            {link.label}
-                                        </ExternalLink>
-                                    </li>
-                                ))}
-                            </ul>
-                        )}
-                    </div>
+                                            key={link.slug}
+                                            onClick={() =>
+                                                router.push(link.slug)
+                                            }
+                                        />
+                                    ))}
+                                </ul>
+                            )}
 
-                    {/* COPYRIGHT */}
-                    <p>
-                        © {new Date().getFullYear()} Obsidian Park. All rights
-                        reserved.
-                    </p>
-                    <p>
-                        Design & Development by{' '}
-                        <ExternalLink
-                            variant='primary'
-                            href='https://juliscapucin.com'
-                        >
-                            Juli Scapucin
-                        </ExternalLink>
-                    </p>
+                            {/* SOCIAL LINKS */}
+                            {socialLinks && socialLinks.length > 0 && (
+                                <ul className='self-center'>
+                                    {socialLinks.map((link) => (
+                                        <li key={link.label}>
+                                            <ExternalLink
+                                                className='underlined-link text-title-small text-primary md:text-title-medium'
+                                                href={link.url}
+                                                variant='primary'
+                                            >
+                                                {link.label}
+                                            </ExternalLink>
+                                        </li>
+                                    ))}
+                                </ul>
+                            )}
+                        </div>
+
+                        {/* COPYRIGHT */}
+                        <p>
+                            © {new Date().getFullYear()} Obsidian Park. All
+                            rights reserved.
+                        </p>
+                        <p>
+                            Design & Development by{' '}
+                            <ExternalLink
+                                variant='primary'
+                                href='https://juliscapucin.com'
+                            >
+                                Juli Scapucin
+                            </ExternalLink>
+                        </p>
+                    </div>
                 </div>
-            </div>
-        </footer>
+            </footer>
+        </div>
     );
 }

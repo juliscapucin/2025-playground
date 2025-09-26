@@ -156,7 +156,7 @@ export default function GalleryWithMinimap({ images }: MinimapProps) {
                         {/* MINIMAP MARKER */}
                         <div
                             ref={minimapMarkerRef}
-                            className='absolute z-150 w-full rounded-2xl border border-secondary/50'
+                            className='absolute z-150 w-full rounded-2xl border border-accent'
                         ></div>
                         {/* THUMBNAILS */}
                         <div

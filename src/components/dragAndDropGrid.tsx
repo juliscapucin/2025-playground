@@ -292,9 +292,9 @@ function Card({ title, content }: CardProps) {
         >
             <div
                 ref={cardContentRef}
-                className='card-content flex h-full w-full items-start justify-center rounded-xl border bg-secondary text-lg font-bold'
+                className='card-content flex h-full w-full items-start justify-center rounded-xl bg-primary-accent text-lg font-bold'
             >
-                <div className='m-8 mt-16 text-primary'>
+                <div className='m-8 mt-16 text-secondary'>
                     <h2 className='text-center'>{title}</h2>
                     <p className='mt-2 text-sm font-normal text-pretty'>
                         {content}

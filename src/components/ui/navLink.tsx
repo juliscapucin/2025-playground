@@ -21,7 +21,7 @@ export default function NavLink({
     return (
         <li className='max-h-8 overflow-clip'>
             <CustomButton
-                classes={`underlined-link text-title-small md:text-title-medium disabled:pointer-events-none text-${variant} disabled:text-accent ${classes}`}
+                classes={`underlined-link text-title-small md:text-title-medium disabled:pointer-events-none text-${variant} disabled:text-primary ${classes}`}
                 disabled={
                     pathname.includes(label.toLowerCase()) || props.disabled
                 }

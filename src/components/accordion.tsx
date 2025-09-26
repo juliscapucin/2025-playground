@@ -39,7 +39,7 @@ export default function Accordion({ items }: AccordionProps) {
                 return (
                     <div
                         key={index}
-                        className='accordion-item overflow-hidden border-t border-secondary/20 last:border-b'
+                        className='accordion-item overflow-hidden border-t border-accent last:border-b'
                     >
                         {/* Header */}
                         <button
@@ -47,12 +47,12 @@ export default function Accordion({ items }: AccordionProps) {
                             aria-expanded={isOpen}
                             aria-controls={`accordion-content-${index}`}
                             id={`accordion-header-${index}`}
-                            className='group relative flex w-full cursor-pointer items-center justify-between px-4 py-3 pr-10 text-left font-primary text-title-large text-secondary transition duration-600 hover:bg-secondary/50 hover:text-primary focus:bg-secondary/50 focus:text-primary'
+                            className='group relative flex w-full cursor-pointer items-center justify-between px-4 py-3 pr-10 text-left font-primary text-title-large text-secondary transition duration-600 hover:bg-accent focus:bg-accent'
                         >
                             {item.title}
 
                             {/* Chevron Icon */}
-                            <span className='flex h-8 w-8 items-center justify-center text-secondary group-hover:text-primary group-focus:text-primary'>
+                            <span className='flex h-8 w-8 items-center justify-center text-secondary'>
                                 <IconChevron
                                     direction={isOpen ? 'down' : 'up'}
                                 />
@@ -61,7 +61,7 @@ export default function Accordion({ items }: AccordionProps) {
 
                         {/* Content Area */}
                         <div
-                            className={`overflow-hidden bg-primary transition-[height] duration-800 ${isOpen ? 'h-fit' : 'h-0'}`}
+                            className={`overflow-hidden bg-primary transition-[height] duration-300 ${isOpen ? 'h-fit' : 'h-0'}`}
                         >
                             <p className='mx-4 my-8 text-justify text-secondary'>
                                 {item.content}
