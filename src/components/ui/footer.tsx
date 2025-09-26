@@ -89,7 +89,7 @@ export default function Footer({ navlinks }: FooterProps) {
                     className='h-full w-full bg-secondary text-primary transition-[background-color] duration-800'
                 >
                     <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
-                        <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge text-accent'>
+                        <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge text-primary'>
                             <Heading tag='h3' variant='display'>
                                 Obsidian
                             </Heading>

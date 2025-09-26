@@ -130,15 +130,14 @@ export default function Hero() {
     return (
         <div className='pointer-events-none relative flex h-[calc(100vh-var(--header-height))] w-full flex-col items-stretch justify-stretch'>
             <div ref={outerContainerRef} className='relative h-full w-full'>
-                {/* Preloader Progress */}
+                {/* PRELOADER PROGRESS */}
                 <div
                     data-gsap='preloader-progress-bar-container'
                     className='pointer-events-none absolute inset-0 z-10 flex items-center justify-center'
                 >
-                    {/* Preloader Progress Bar */}
+                    {/* PRELOADER PROGRESS BAR */}
                     <div className='relative h-fit w-fit overflow-clip rounded-huge px-12'>
-                        {/* Preloader Logo */}
-
+                        {/* PRELOADER LOGO */}
                         <div
                             data-gsap='preloader-progress-bar'
                             className='absolute inset-0 z-0 origin-left scale-x-0 transform bg-secondary will-change-transform'
@@ -154,13 +153,13 @@ export default function Hero() {
                     </div>
                 </div>
 
-                {/* Hero */}
+                {/* HERO */}
                 <div
                     data-gsap='mask'
                     className='relative h-full w-full opacity-0'
                 >
-                    {/* Hero Content */}
-                    <div className='text-accent absolute flex h-full w-full items-center justify-center'>
+                    {/* HERO CONTENT */}
+                    <div className='absolute flex h-full w-full items-center justify-center text-accent'>
                         <Heading
                             tag='h1'
                             data-gsap='welcome-text'
@@ -171,12 +170,13 @@ export default function Hero() {
                         </Heading>
                     </div>
 
-                    {/* Hero Image */}
+                    {/* HERO IMAGE */}
                     <div
                         data-gsap='hero-image'
                         className='absolute top-0 left-0 -z-1 h-full w-full scale-125 transform will-change-transform'
                     >
-                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary opacity-50'></div>
+                        {/* GRADIENT OVERLAY */}
+                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary opacity-20'></div>
                         <Image
                             src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
                             alt='Logo'
@@ -187,7 +187,7 @@ export default function Hero() {
                         />
                     </div>
 
-                    {/* Hero Footer */}
+                    {/* HERO FOOTER */}
                     <div className='absolute inset-0 z-5 flex w-full items-start justify-between p-12 lg:items-end'>
                         <Subtitle
                             tag='h2'
