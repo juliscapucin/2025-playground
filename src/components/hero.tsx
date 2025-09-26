@@ -160,7 +160,7 @@ export default function Hero() {
                     className='relative h-full w-full opacity-0'
                 >
                     {/* Hero Content */}
-                    <div className='absolute flex h-full w-full items-center justify-center'>
+                    <div className='text-accent absolute flex h-full w-full items-center justify-center'>
                         <Heading
                             tag='h1'
                             data-gsap='welcome-text'
@@ -176,7 +176,7 @@ export default function Hero() {
                         data-gsap='hero-image'
                         className='absolute top-0 left-0 -z-1 h-full w-full scale-125 transform will-change-transform'
                     >
-                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary'></div>
+                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary opacity-50'></div>
                         <Image
                             src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
                             alt='Logo'

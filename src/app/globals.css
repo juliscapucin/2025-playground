@@ -3,18 +3,21 @@
 :root {
     interpolate-size: allow-keywords; /* To animate auto-height on accordion component */
 
-    --primary: oklch(21.3% 0.034 184.9);
-    --secondary: oklch(88.669% 0.01899 180.52);
+    --primary: oklch(27.177% 0.02119 153.349);
+    --secondary: oklch(85.935% 0.03553 153.292);
+    --accent: oklch(71.967% 0.18251 153.746);
 }
 
 [data-theme='light'] {
-    --primary: oklch(88.669% 0.01899 180.52);
-    --secondary: oklch(21.3% 0.034 184.9);
+    --primary: oklch(85.935% 0.03553 153.292);
+    --secondary: oklch(29.658% 0.04127 153.001);
+    --accent: oklch(75.958% 0.19968 151.682);
 }
 
 @theme inline {
     --color-primary: var(--primary);
     --color-secondary: var(--secondary);
+    --color-accent: var(--accent);
 
     --font-primary: var(--font-acma);
     --font-secondary: var(--font-noto);

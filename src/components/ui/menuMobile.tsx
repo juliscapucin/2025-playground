@@ -33,7 +33,7 @@ export default function MenuMobile({ navLinks }: NavLinksProps) {
     return (
         navLinks && (
             <div className='pointer-events-none block h-dvh lg:hidden'>
-                <div className='z-burger border-faded pointer-events-auto absolute top-0 flex w-full items-center justify-end border-b bg-primary pr-4'>
+                <div className='z-burger pointer-events-auto absolute top-0 flex w-full items-center justify-end bg-primary pr-4'>
                     {/* BURGER BUTTON */}
                     <ButtonBurger
                         action={(e) => {
