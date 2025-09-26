@@ -77,13 +77,13 @@ export default function Footer({ navlinks }: FooterProps) {
             {/* MASK */}
             <div
                 ref={footerMaskRef}
-                className='absolute -top-2 z-150 h-full w-full bg-primary'
+                className='absolute -top-2 z-150 h-full w-full bg-primary transition-[background-color] duration-800'
             ></div>
 
             {/* CONTENT */}
             <div
                 ref={footerContentRef}
-                className='h-full w-full bg-secondary text-primary'
+                className='h-full w-full bg-secondary text-primary transition-[background-color] duration-800'
             >
                 <div className='relative mx-auto flex h-full w-full max-w-[var(--max-width)] flex-col items-start justify-end p-8'>
                     <div className='mb-40 flex h-1/2 w-full items-end justify-between rounded-huge'>

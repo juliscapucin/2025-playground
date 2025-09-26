@@ -17,7 +17,7 @@ export default function Header({ navLinks }: HeaderProps) {
     return (
         <header className='pointer-events-none fixed top-0 right-0 left-0 z-50'>
             <MenuMobile navLinks={navLinks} />
-            <nav className='h-16 justify-between overflow-clip bg-primary px-8 py-4 md:hidden lg:flex max-w-[var(--max-width)] mx-auto pointer-events-auto'>
+            <nav className='pointer-events-auto mx-auto h-16 max-w-[var(--max-width)] justify-between overflow-clip bg-primary px-8 py-4 transition-[background-color] duration-800 md:hidden lg:flex'>
                 {/* LOGO */}
                 <Button onClick={() => router.push('/')}>Home</Button>
 
