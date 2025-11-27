@@ -1,7 +1,6 @@
 import {
     ExpandableCards,
     Accordion,
-    CardsShuffle,
     Table,
     Hero,
     DragAndDropGrid,
@@ -17,9 +16,8 @@ export default function Home() {
             <Hero />
             <Table />
             <ExpandableCards />
-            {/* <CardsShuffle /> */}
             <Accordion items={faqItems} />
-            <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} />
+            {/* <DragAndDropGrid cardsData={cards} rowHeight={300} columns={4} /> */}
             <GalleryWithMinimap images={images} />
             <Table />
             <HeadingWithParagraph

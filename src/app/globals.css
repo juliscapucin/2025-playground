@@ -17,7 +17,7 @@
     --secondary: oklab(0.23 -0.02 -0.01);
     --accent: oklch(88.464% 0.22826 129.011);
     --dark: oklab(23.169% -0.03068 0.01643);
-    --light: oklch(89.715% 0.00959 93.611);
+    --light: oklch(76.345% 0.0173 91.603);
 }
 
 @theme inline {
@@ -32,7 +32,7 @@
     --font-secondary: var(--font-noto);
     --font-mono: var(--font-geist-mono);
 
-    --radius-huge: 6rem;
+    --radius-huge: 3rem;
 
     --text-display-large: 147px;
     --text-display-medium: 103px;
@@ -54,7 +54,7 @@
 
     /* Heights based on Tailwind's spacing scale: --spacing: 0.25rem /* 4px */
     --header-height: calc(var(--spacing) * 14) /* [14] 4rem = 56px */;
-    --footer-height: 600px;
+    --height-footer: 700px;
     --height-content: calc(100vh - var(--header-height));
 
     /* Minimap dimensions */

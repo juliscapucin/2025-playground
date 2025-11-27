@@ -7,7 +7,7 @@ import { CustomButton } from '@/components/ui';
 type NavLinkProps = React.ButtonHTMLAttributes<HTMLButtonElement> & {
     label: string;
     classes?: string;
-    variant: 'primary' | 'secondary';
+    variant: 'dark' | 'light';
 };
 
 export default function NavLink({
@@ -21,7 +21,7 @@ export default function NavLink({
     return (
         <li className='max-h-8 overflow-clip'>
             <CustomButton
-                classes={`text-title-small md:text-title-medium disabled:pointer-events-none text-dark disabled:text-dark ${classes}`}
+                classes={`text-title-small md:text-title-medium disabled:pointer-events-none disabled:text-dark ${variant === 'dark' ? 'text-dark' : 'text-light'} ${classes}`}
                 disabled={
                     pathname.includes(label.toLowerCase()) || props.disabled
                 }

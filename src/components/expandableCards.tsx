@@ -29,48 +29,47 @@ const cards = [
 ];
 
 export default function ExpandableCards() {
-    const [activeIdx, setActiveIdx] = useState(0);
+    const [activeIndex, setActiveIndex] = useState(0);
 
     return (
-        <div className='mx-auto my-64 max-w-5xl'>
-            <div className='text-center'>
+        <div className='mx-auto my-64 w-full'>
+            <div className=''>
                 <Heading tag='h2' variant='headline' classes='flex-2'>
                     Plan ahead for every season
                 </Heading>
-                <p className='mx-auto mt-4 mb-8 max-w-sm text-balance text-secondary/70'>
+                <p className='mt-4 mb-8 max-w-sm text-balance text-secondary'>
                     Discover what each season brings, from spring blooms to
                     winter trails, and make the most of your visit year-round.
                 </p>
             </div>
-            <div className='flex h-96 w-full gap-4 overflow-hidden'>
+            <div className='flex h-[60vh] w-full gap-4'>
                 {cards.map((card, index) => (
                     <div
                         key={index}
-                        onMouseEnter={() => setActiveIdx(index)}
-                        onMouseLeave={() => setActiveIdx(-1)}
-                        className={`relative flex-none cursor-pointer overflow-clip rounded-3xl transition-all duration-500 ${activeIdx === index ? 'grow-[10]' : 'grow'} `}
+                        className={`group relative flex-none grow cursor-pointer transition-all duration-500 hover:grow-[10]`}
                     >
-                        <div className='absolute inset-0'>
-                            <Image
-                                src={card.image}
-                                alt={card.title}
-                                fill
-                                style={{ objectFit: 'cover' }}
-                                sizes='(max-width: 768px) 30vw'
-                            />
-                        </div>
+                        <div className='relative h-full grow overflow-clip rounded-3xl'>
+                            <div className='absolute inset-0'>
+                                <Image
+                                    src={card.image}
+                                    alt={card.title}
+                                    fill
+                                    style={{ objectFit: 'cover' }}
+                                    sizes='(max-width: 768px) 30vw'
+                                />
+                            </div>
 
-                        {/* Label */}
-                        <div className='absolute bottom-4 left-4 flex items-center gap-4 text-secondary'>
-                            <div className='rounded-full bg-primary px-4 py-1 uppercase'>
+                            {/* Label */}
+                            <h3 className='absolute bottom-4 left-4 w-fit rounded-full bg-accent px-4 py-1 text-dark uppercase'>
                                 {card.title}
-                            </div>
-                            <div
-                                className={`text-body-medium text-nowrap transition-opacity duration-300 ${activeIdx === index ? 'opacity-100' : 'opacity-0'}`}
-                            >
-                                {card.subtitle}
-                            </div>
+                            </h3>
                         </div>
+                        {/* Subtitle */}
+                        <p
+                            className={`absolute -bottom-8 left-4 text-body-medium text-nowrap opacity-0 transition-opacity duration-300 group-hover:opacity-100`}
+                        >
+                            {card.subtitle}
+                        </p>
                     </div>
                 ))}
             </div>

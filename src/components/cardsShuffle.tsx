@@ -124,12 +124,8 @@ export default function Carousel() {
             className='relative mx-auto my-64 h-[calc(100vh-var(--header-height))] w-full'
         >
             <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center text-accent'>
-                <Heading
-                    tag='h2'
-                    variant='display'
-                    data-gsap='cards-shuffle-heading'
-                >
-                    Photo Galleries
+                <Heading tag='h2' variant='display'>
+                    About Us
                 </Heading>
             </div>
             <div

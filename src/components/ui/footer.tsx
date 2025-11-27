@@ -72,15 +72,19 @@ export default function Footer({ navlinks }: FooterProps) {
     return (
         <div className='relative w-full bg-primary'>
             {/* MASK FLICKER */}
-            <div className='absolute -top-4 z-15 h-16 w-full rounded-b-3xl bg-primary transition-colors duration-700'></div>
+            <div
+                className='absolute -top-4 z-15 h-16 w-full rounded-b-3xl bg-primary transition-colors duration-700'
+                aria-hidden='true'
+            ></div>
             <footer
                 ref={footerContainerRef}
-                className='relative block h-[700px] overflow-clip bg-primary pb-8'
+                className='relative block h-footer overflow-clip bg-primary'
             >
                 {/* MASK */}
                 <div
                     ref={footerMaskRef}
                     className='absolute -top-32 z-10 h-[calc(100%+8rem)] w-full rounded-b-3xl bg-primary transition-colors duration-700'
+                    aria-hidden='true'
                 ></div>
 
                 {/* CONTENT */}
@@ -100,7 +104,7 @@ export default function Footer({ navlinks }: FooterProps) {
                                     {navlinks.map((link) => (
                                         <NavLink
                                             label={link.label}
-                                            variant='primary'
+                                            variant='light'
                                             key={link.slug}
                                             onClick={() =>
                                                 router.push(link.slug)

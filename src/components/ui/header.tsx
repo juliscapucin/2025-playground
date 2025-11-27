@@ -76,7 +76,7 @@ export default function Header({ navLinks }: HeaderProps) {
                     {/* START */}
                     <NavLink
                         label='Start'
-                        variant='primary'
+                        variant='dark'
                         onClick={() => router.push('/')}
                         onMouseEnter={() => animateBottomBorder('/', 0)}
                         disabled={pathname === '/'}
@@ -86,7 +86,7 @@ export default function Header({ navLinks }: HeaderProps) {
                             link.slug !== '/' && (
                                 <NavLink
                                     label={link.label}
-                                    variant='primary'
+                                    variant='dark'
                                     key={`panel-button-${index}`}
                                     onClick={() => router.push(link.slug)}
                                     onMouseEnter={() =>
