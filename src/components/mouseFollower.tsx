@@ -1,11 +1,11 @@
 'use client';
 
-import { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { useRef } from 'react';
 
 import gsap from 'gsap';
 import { useGSAP } from '@gsap/react';
 import { Observer } from 'gsap/Observer';
-gsap.registerPlugin(useGSAP, Observer);
+gsap.registerPlugin(Observer);
 
 import { IconChevron } from '@/components/icons';
 

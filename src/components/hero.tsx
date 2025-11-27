@@ -55,10 +55,12 @@ function animateMask() {
         .fromTo(
             '[data-gsap="mask"]',
             {
-                clipPath: 'inset(50% 40% 50% 40% round var(--radius-huge))',
+                clipPath:
+                    'inset(50% 40% 50% 40% round 0 0 var(--radius-huge) var(--radius-huge))',
             },
             {
-                clipPath: 'inset(0% 0% 0% 0% round var(--radius-huge))',
+                clipPath:
+                    'inset(0% 0% 0% 0% round 0 0 var(--radius-huge) var(--radius-huge))',
                 ease: 'power2.out',
                 duration: 1,
             }
@@ -128,7 +130,7 @@ export default function Hero() {
         // GSDevTools.create({ animation: tl });
     }, []);
     return (
-        <div className='pointer-events-none relative flex h-[calc(100vh-var(--header-height))] w-full flex-col items-stretch justify-stretch'>
+        <div className='pointer-events-none relative flex h-svh w-full flex-col items-stretch justify-stretch'>
             <div ref={outerContainerRef} className='relative h-full w-full'>
                 {/* PRELOADER PROGRESS */}
                 <div
@@ -176,7 +178,7 @@ export default function Hero() {
                         className='absolute top-0 left-0 -z-1 h-full w-full scale-125 transform will-change-transform'
                     >
                         {/* GRADIENT OVERLAY */}
-                        <div className='absolute inset-0 z-5 bg-radial from-transparent from-20% to-primary opacity-20'></div>
+                        <div className='absolute inset-0 z-5 bg-linear-180 from-transparent from-20% to-dark opacity-80'></div>
                         <Image
                             src='/vitalii-khodzinskyi-kzO8qaUSuF4-unsplash.jpg'
                             alt='Logo'
@@ -188,7 +190,7 @@ export default function Hero() {
                     </div>
 
                     {/* HERO FOOTER */}
-                    <div className='absolute inset-0 z-5 flex w-full items-start justify-between p-12 lg:items-end'>
+                    <div className='text-light absolute inset-0 z-5 flex w-full items-start justify-between p-12 lg:items-end'>
                         <Subtitle
                             tag='h2'
                             data-gsap='hero-footer-heading'

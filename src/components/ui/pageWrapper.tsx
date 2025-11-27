@@ -25,7 +25,7 @@ export default function PageWrapper({ children }: PageWrapperProps) {
     return (
         <div id='smooth-wrapper'>
             <div id='smooth-content'>
-                <main className='mx-auto mt-[var(--header-height)] max-w-[var(--max-width)] px-4 pb-16 md:px-8'>
+                <main className='mx-auto mt-0 max-w-[var(--max-width)] px-4 pb-16 md:px-8'>
                     {children}
                 </main>
                 <Footer navlinks={navLinks} />

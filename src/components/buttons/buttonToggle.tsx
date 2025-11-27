@@ -29,9 +29,10 @@ export default function ButtonToggle({
 
     return (
         <button
-            className={`relative flex h-[18px] w-8 items-center justify-center rounded-full bg-secondary p-1 transition-colors duration-200 hover:bg-accent ${classes}`}
+            className={`relative flex h-[18px] w-8 items-center justify-center rounded-full bg-secondary p-1 transition-colors duration-200 hover:bg-primary-accent ${classes}`}
             {...props}
         >
+            {/* TOGGLE KNOB */}
             <div
                 className={`absolute aspect-square h-4 rounded-full bg-primary transition-colors duration-200 ${toggleState === 'on' ? 'right-1' : 'left-1'}`}
             ></div>
