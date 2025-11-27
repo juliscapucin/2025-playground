@@ -95,7 +95,7 @@ export default function Carousel() {
             scrollTrigger: {
                 id: 'cards-shuffle',
                 trigger: container,
-                start: 'top 5%',
+                start: 'top var(--header-height)',
                 end: '+=400%',
                 scrub: 0,
                 pin: true,
@@ -121,11 +121,11 @@ export default function Carousel() {
     return (
         <div
             ref={containerRef}
-            className='relative mx-auto my-64 h-[calc(100vh-var(--header-height))] w-full'
+            className='relative mx-auto mb-64 h-[calc(100vh-var(--header-height))] w-full'
         >
             <div className='pointer-events-none absolute inset-0 z-10 flex h-full w-full items-center justify-center text-accent'>
                 <Heading tag='h2' variant='display'>
-                    About Us
+                    The Team
                 </Heading>
             </div>
             <div
